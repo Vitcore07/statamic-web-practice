@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="{{ site:short_locale ?? 'en' }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {{ if title }}
+            {{ title }} | {{ config:app:name }}
+        {{ else }}
+            {{ config:app:name }}
+        {{ /if }}
+    </title>
+    {{ vite src="resources/css/app.css|resources/js/app.js" }}
+</head>
+<body class="min-h-screen bg-stone-50 text-stone-900 antialiased">
+    <div class="relative min-h-screen">
+        {{ template_content }}
+    </div>
+</body>
+</html>
