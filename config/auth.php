@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\User;
-
 return [
 
     /*
@@ -63,8 +61,7 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', User::class),
+            'driver' => 'statamic',
         ],
 
         // 'users' => [
@@ -94,7 +91,9 @@ return [
 
     'passwords' => [
         'users' => [
+            'driver' => env('AUTH_PASSWORD_RESET_DRIVER', 'cache'),
             'provider' => 'users',
+            'store' => env('AUTH_PASSWORD_RESET_STORE'),
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,
