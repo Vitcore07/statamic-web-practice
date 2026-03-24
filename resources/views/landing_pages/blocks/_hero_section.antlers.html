@@ -1,0 +1,29 @@
+<section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
+    <div class="relative overflow-hidden rounded-[2.75rem] border border-white/60 bg-[#eef4ff] shadow-[0_28px_70px_-34px_rgba(15,23,42,0.4)]">
+        {{ if background_image }}
+            {{ background_image }}
+                <div class="absolute inset-0">
+                    <img
+                        src="{{ url }}"
+                        alt="{{ alt ?? title ?? '' }}"
+                        class="h-full w-full object-cover"
+                    >
+                </div>
+            {{ /background_image }}
+            <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.16),rgba(16,24,40,0.08))]"></div>
+        {{ else }}
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.75),_transparent_32%),linear-gradient(135deg,_rgba(132,204,255,0.22),_rgba(59,130,246,0.15)_42%,_rgba(15,23,42,0.2))]"></div>
+        {{ /if }}
+
+        <div class="relative px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+            {{ hero_components }}
+                {{ if type == "hero_title" }}
+                    {{ partial:landing_pages/blocks/hero_section/title }}
+                {{ /if }}
+                {{ if type == "hero_highlights" }}
+                    {{ partial:landing_pages/blocks/hero_section/highlights }}
+                {{ /if }}
+            {{ /hero_components }}
+        </div>
+    </div>
+</section>

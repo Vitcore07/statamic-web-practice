@@ -1,0 +1,32 @@
+title: 'Hero Section'
+fields:
+  -
+    handle: background_image
+    field:
+      type: assets
+      display: 'Background Image'
+      container: assets
+      max_files: 1
+      localizable: true
+  -
+    handle: hero_components
+    field:
+      type: replicator
+      display: Components
+      localizable: true
+      sets:
+        hero:
+          display: Hero
+          sets:
+            hero_title:
+              display: 'Hero Title'
+              icon: text-formatting-wrap-box
+              fields:
+                -
+                  import: blocks.hero_title
+            hero_highlights:
+              display: 'Hero Highlights'
+              icon: favorite-star
+              fields:
+                -
+                  import: blocks.hero_highlights
