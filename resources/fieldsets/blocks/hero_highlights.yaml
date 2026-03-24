@@ -1,0 +1,13 @@
+title: 'Hero Highlights'
+fields:
+  -
+    handle: highlights
+    field:
+      type: grid
+      display: Highlights
+      mode: stacked
+      add_row: 'Add Hero Highlight'
+      localizable: true
+      fields:
+        -
+          import: blocks.hero_highlight
