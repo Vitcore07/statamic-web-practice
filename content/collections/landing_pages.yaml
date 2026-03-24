@@ -1,5 +1,9 @@
 title: 'Landing Pages'
 icon: collections
+sites:
+  - slovak
+  - default
+propagate: false
 template: landing_pages/show
 layout: layout
 taxonomies:
