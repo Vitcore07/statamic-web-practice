@@ -6,6 +6,7 @@ fields:
       type: button_group
       display: 'Expected Per Row'
       default: '3'
+      localizable: true
       options:
         '2': '2'
         '3': '3'
@@ -17,6 +18,7 @@ fields:
       display: Cards
       mode: stacked
       add_row: 'Add Highlight Card'
+      localizable: true
       fields:
         -
           import: blocks.highlight_card

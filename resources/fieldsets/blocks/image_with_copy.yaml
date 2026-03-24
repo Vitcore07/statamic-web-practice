@@ -6,6 +6,7 @@ fields:
       type: button_group
       display: Variant
       default: blue
+      localizable: true
       options:
         blue: Blue
         red: Red
@@ -16,6 +17,7 @@ fields:
       type: button_group
       display: 'Image Position'
       default: left
+      localizable: true
       options:
         left: Left
         right: Right
@@ -27,10 +29,12 @@ fields:
       display: Image
       container: assets
       max_files: 1
+      localizable: true
       width: 50
   -
     handle: content
     field:
       type: bard
       display: Content
+      localizable: true
       width: 50

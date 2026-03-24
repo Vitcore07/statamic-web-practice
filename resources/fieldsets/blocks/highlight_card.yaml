@@ -5,6 +5,7 @@ fields:
     field:
       type: text
       display: Title
+      localizable: true
   -
     handle: image
     field:
@@ -12,8 +13,10 @@ fields:
       display: Image
       container: assets
       max_files: 1
+      localizable: true
   -
     handle: content
     field:
       type: bard
       display: Content
+      localizable: true
