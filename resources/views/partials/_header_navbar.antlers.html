@@ -1,0 +1,82 @@
+<header class="sticky top-0 z-50 bg-white shadow-[0_1px_0_rgba(15,23,42,0.08)]">
+    <div class="relative mx-auto flex max-w-[1620px] items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-10">
+        <a href="/" class="flex shrink-0 items-center gap-3.5">
+            <img src="/assets/webbox-mark.svg" alt="" class="h-15 w-15 rounded-[1.15rem] object-cover shadow-[0_10px_24px_-16px_rgba(61,143,195,0.65)]">
+
+            <span class="flex flex-col justify-center">
+                <span class="flex items-center gap-2">
+                    <span class="text-[2.6rem] font-semibold leading-none tracking-[-0.06em] text-stone-800">webBox</span>
+                    <svg class="mt-1 h-4 w-4 text-stone-500" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M1 1.25L6 6.25L11 1.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+
+                <span class="mt-1 flex items-end gap-1.5 leading-none">
+                    <span class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-stone-600">By</span>
+                    <img src="/assets/apis-wordmark.svg" alt="apis.sk" class="h-[1.1rem] w-auto object-contain">
+                </span>
+            </span>
+        </a>
+
+        <nav aria-label="Primary" class="hidden lg:block lg:absolute lg:left-1/2 lg:-translate-x-1/2">
+            <ul class="flex items-center gap-12 xl:gap-16">
+                {{ nav:header max_depth="1" select="title|url|is_current|is_parent" }}
+                    <li>
+                        <a
+                            href="{{ url }}"
+                            class="text-[1.05rem] font-medium tracking-tight text-stone-800 transition hover:text-stone-950 {{ if is_current || is_parent }}text-stone-950{{ /if }}"
+                        >
+                            {{ title }}
+                        </a>
+                    </li>
+                {{ /nav:header }}
+            </ul>
+        </nav>
+
+        <div class="flex shrink-0 items-center gap-3">
+            <div class="hidden items-center rounded-full border border-stone-200 bg-white p-1 lg:flex">
+                {{ locales sort="locale:lang:asc" current_first="false" }}
+                    <a
+                        href="{{ permalink }}"
+                        class="rounded-full px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] transition {{ if is_current }}bg-stone-900 text-white{{ else }}text-stone-500 hover:text-stone-900{{ /if }}"
+                    >
+                        {{ if locale:lang == "en" }}EN{{ else }}SK{{ /if }}
+                    </a>
+                {{ /locales }}
+            </div>
+
+            <a
+                href="#contact"
+                class="hidden items-center rounded-full bg-[#4a97d0] px-8 py-4 text-[1.05rem] font-medium tracking-tight text-white shadow-[0_10px_22px_-12px_rgba(74,151,208,0.9)] transition hover:bg-[#3d8fc3] lg:inline-flex"
+            >
+                Konzultacia
+            </a>
+
+            <nav aria-label="Primary" class="lg:hidden">
+                <div class="flex flex-wrap items-center justify-end gap-2">
+                    {{ locales sort="locale:lang:asc" current_first="false" }}
+                        <a
+                            href="{{ permalink }}"
+                            class="rounded-full px-3 py-2 text-xs font-semibold uppercase tracking-[0.18em] transition {{ if is_current }}bg-stone-900 text-white{{ else }}bg-white text-stone-500 ring-1 ring-stone-200 hover:text-stone-900{{ /if }}"
+                        >
+                            {{ if locale:lang == "en" }}EN{{ else }}SK{{ /if }}
+                        </a>
+                    {{ /locales }}
+
+                    <ul class="flex flex-wrap items-center justify-end gap-2">
+                        {{ nav:header max_depth="1" select="title|url|is_current|is_parent" }}
+                            <li>
+                                <a
+                                    href="{{ url }}"
+                                    class="rounded-full px-4 py-2 text-sm font-medium text-stone-700 ring-1 ring-stone-200 transition hover:text-stone-950"
+                                >
+                                    {{ title }}
+                                </a>
+                            </li>
+                        {{ /nav:header }}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
