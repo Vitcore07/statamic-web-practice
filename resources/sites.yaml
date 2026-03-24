@@ -1,0 +1,10 @@
+slovak:
+  name: Slovak
+  url: /
+  locale: '{{ config:app.locale }}'
+  lang: sk
+default:
+  name: English
+  url: /en
+  locale: '{{ config:app.locale }}'
+  lang: en
