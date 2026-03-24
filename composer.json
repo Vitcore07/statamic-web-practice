@@ -55,7 +55,8 @@
         ],
         "docker-dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently \"./vendor/bin/sail up\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"
+            "./vendor/bin/sail up -d",
+            "npx concurrently \"./vendor/bin/sail artisan queue:listen --tries=1 --timeout=0\" \"./vendor/bin/sail artisan pail --timeout=0\" \"npm run dev\" --names=queue,logs,vite --kill-others"
         ],
         "test": [
             "@php artisan config:clear --ansi",
