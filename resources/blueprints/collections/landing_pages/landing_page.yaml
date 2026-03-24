@@ -32,6 +32,12 @@ tabs:
                       fields:
                         -
                           import: blocks.image_with_copy
+                    hero_section:
+                      display: 'Hero Section'
+                      icon: layout-top-panel-1
+                      fields:
+                        -
+                          import: blocks.hero_section
                     highlight_card:
                       display: 'Highlight Card'
                       icon: media-image-picture-gallery

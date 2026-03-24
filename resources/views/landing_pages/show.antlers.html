@@ -17,6 +17,9 @@
     </div>
 </header>
 {{ page_sections }}
+    {{ if type == "hero_section" }}
+        {{ partial:landing_pages/blocks/hero_section }}
+    {{ /if }}
     {{ if type == "image_with_copy" }}
         {{ partial:landing_pages/blocks/image_with_copy }}
     {{ /if }}
