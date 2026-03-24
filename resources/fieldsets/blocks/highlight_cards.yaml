@@ -1,0 +1,22 @@
+title: 'Highlight Cards'
+fields:
+  -
+    handle: expected_per_row
+    field:
+      type: button_group
+      display: 'Expected Per Row'
+      default: '3'
+      options:
+        '2': '2'
+        '3': '3'
+        '4': '4'
+  -
+    handle: cards
+    field:
+      type: grid
+      display: Cards
+      mode: stacked
+      add_row: 'Add Highlight Card'
+      fields:
+        -
+          import: blocks.highlight_card

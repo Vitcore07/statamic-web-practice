@@ -1,0 +1,23 @@
+<article class="h-full overflow-hidden rounded-[2rem] border border-stone-200 bg-white shadow-sm">
+    {{ if image }}
+        {{ image }}
+            <figure class="overflow-hidden border-b border-stone-200 bg-stone-100">
+                <img
+                    src="{{ url }}"
+                    alt="{{ alt ?? title ?? '' }}"
+                    class="h-64 w-full object-cover"
+                >
+            </figure>
+        {{ /image }}
+    {{ /if }}
+
+    <div class="px-6 py-8 text-center text-stone-800 sm:px-8">
+        {{ if title }}
+            <h3 class="text-2xl font-semibold tracking-tight text-stone-950">{{ title }}</h3>
+        {{ /if }}
+
+        <div class="max-w-none [&_blockquote]:rounded-[1.5rem] [&_blockquote]:border-l-4 [&_blockquote]:border-stone-400 [&_blockquote]:bg-stone-50 [&_blockquote]:px-6 [&_blockquote]:py-5 [&_blockquote]:text-left [&_blockquote]:text-lg [&_blockquote]:leading-8 [&_blockquote]:font-medium [&_blockquote]:italic [&_blockquote]:text-stone-900 [&_blockquote]:shadow-sm [&_p]:leading-8">
+            {{ content }}
+        </div>
+    </div>
+</article>

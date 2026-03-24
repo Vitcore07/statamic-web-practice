@@ -1,0 +1,20 @@
+title: 'Landing Pages'
+icon: collections
+route: '/landing-pages/{id}'
+template: landing_pages/show
+layout: layout
+taxonomies:
+  - products
+revisions: false
+slugs: false
+date: true
+sort_dir: asc
+default_status: draft
+date_behavior:
+  past: public
+  future: private
+preview_targets:
+  -
+    label: Entry
+    url: '{permalink}'
+    refresh: true

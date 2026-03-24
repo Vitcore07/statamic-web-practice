@@ -1,0 +1,19 @@
+title: 'Highlight Card'
+fields:
+  -
+    handle: title
+    field:
+      type: text
+      display: Title
+  -
+    handle: image
+    field:
+      type: assets
+      display: Image
+      container: assets
+      max_files: 1
+  -
+    handle: content
+    field:
+      type: bard
+      display: Content
