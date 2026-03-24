@@ -1,11 +1,11 @@
 title: 'Landing Pages'
 icon: collections
-route: '/landing-pages/{id}'
 template: landing_pages/show
 layout: layout
 taxonomies:
   - products
 revisions: false
+route: '/landing-pages/{id}'
 slugs: false
 date: true
 sort_dir: asc
