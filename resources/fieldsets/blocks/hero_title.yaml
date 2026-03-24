@@ -23,13 +23,7 @@ fields:
         left: Left
         right: Right
   -
-    handle: image
-    field:
-      type: assets
-      display: Image
-      container: assets
-      max_files: 1
-      localizable: true
+    import: blocks.media_slot
   -
     handle: cta_label
     field:
