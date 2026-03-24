@@ -10,6 +10,9 @@
             {{ config:app:name }}
         {{ /if }}
     </title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ glide src='assets/webbox-favicon.png' width='32' height='32' fit='crop' }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ glide src='assets/webbox-favicon.png' width='16' height='16' fit='crop' }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ glide src='assets/webbox-favicon.png' width='180' height='180' fit='crop' }}">
     {{ vite src="resources/css/app.css|resources/js/app.js" }}
 </head>
 <body class="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(116,207,179,0.14),_transparent_36%),linear-gradient(180deg,_#fcfcfb_0%,_#f5f7f3_100%)] text-stone-900 antialiased">
