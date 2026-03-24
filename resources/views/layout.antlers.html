@@ -12,8 +12,10 @@
     </title>
     {{ vite src="resources/css/app.css|resources/js/app.js" }}
 </head>
-<body class="min-h-screen bg-stone-50 text-stone-900 antialiased">
+<body class="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(116,207,179,0.14),_transparent_36%),linear-gradient(180deg,_#fcfcfb_0%,_#f5f7f3_100%)] text-stone-900 antialiased">
     <div class="relative min-h-screen">
+        {{ partial:partials/header_navbar }}
+
         {{ template_content }}
     </div>
 </body>
