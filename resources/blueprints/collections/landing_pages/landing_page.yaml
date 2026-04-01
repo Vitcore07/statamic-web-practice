@@ -19,6 +19,7 @@ tabs:
               type: replicator
               display: Structure
               localizable: true
+              collapse: true
               validate:
                 - required
               sets:
