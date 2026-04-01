@@ -1,26 +1,19 @@
-<div
-    data-apis-box-template
-    class="relative mx-auto aspect-[300/286] w-full max-w-[30rem] overflow-hidden"
->
-    <div class="pointer-events-none absolute size-5 opacity-0"></div>
-    <canvas
-        data-apis-box-canvas
-        class="absolute inset-0 block size-full opacity-100 transition-opacity duration-100 ease-in-out"
-    ></canvas>
+<div data-apis-box class="relative mx-auto aspect-[300/286] w-full max-w-[30rem] overflow-hidden">
+    <canvas data-apis-box-canvas class="absolute inset-0 block size-full"></canvas>
 </div>
 
 <script>
     (() => {
-        if (window.__apisBoxTemplate) {
-            window.__apisBoxTemplate.scan();
+        if (window.__apisBoxRenderer) {
+            window.__apisBoxRenderer.scan();
 
             return;
         }
 
-        const markImage = new Image();
-        markImage.src = '/assets/webbox-mark.svg';
+        const logoImage = new Image();
+        logoImage.src = '/assets/webbox-mark.svg';
 
-        function createGradient(ctx, x0, y0, x1, y1, stops) {
+        function makeLinear(ctx, x0, y0, x1, y1, stops) {
             const gradient = ctx.createLinearGradient(x0, y0, x1, y1);
 
             stops.forEach(([offset, color]) => {
@@ -30,7 +23,7 @@
             return gradient;
         }
 
-        function createRadial(ctx, x, y, innerRadius, outerRadius, stops) {
+        function makeRadial(ctx, x, y, innerRadius, outerRadius, stops) {
             const gradient = ctx.createRadialGradient(x, y, innerRadius, x, y, outerRadius);
 
             stops.forEach(([offset, color]) => {
@@ -40,7 +33,7 @@
             return gradient;
         }
 
-        function drawPath(ctx, points, { fill = null, stroke = null, lineWidth = 1, shadowBlur = 0, shadowColor = 'transparent' } = {}) {
+        function withPolygon(ctx, points, callback) {
             ctx.save();
             ctx.beginPath();
             ctx.moveTo(points[0].x, points[0].y);
@@ -50,221 +43,273 @@
             }
 
             ctx.closePath();
-
-            if (fill) {
-                ctx.fillStyle = fill;
-                ctx.fill();
-            }
-
-            if (stroke) {
-                ctx.shadowBlur = shadowBlur;
-                ctx.shadowColor = shadowColor;
-                ctx.strokeStyle = stroke;
-                ctx.lineWidth = lineWidth;
-                ctx.stroke();
-            }
-
+            ctx.clip();
+            callback();
             ctx.restore();
         }
 
-        function drawWire(ctx, from, to, { stroke, lineWidth, shadowBlur = 0, shadowColor = 'transparent' }) {
+        function drawPolygonStroke(ctx, points, strokeStyle, lineWidth, shadowBlur = 0, shadowColor = 'transparent') {
             ctx.save();
             ctx.beginPath();
-            ctx.moveTo(from.x, from.y);
-            ctx.lineTo(to.x, to.y);
+            ctx.moveTo(points[0].x, points[0].y);
+
+            for (let index = 1; index < points.length; index += 1) {
+                ctx.lineTo(points[index].x, points[index].y);
+            }
+
+            ctx.closePath();
+            ctx.strokeStyle = strokeStyle;
+            ctx.lineWidth = lineWidth;
             ctx.shadowBlur = shadowBlur;
             ctx.shadowColor = shadowColor;
-            ctx.strokeStyle = stroke;
-            ctx.lineWidth = lineWidth;
-            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
             ctx.stroke();
             ctx.restore();
         }
 
-        function resize(state) {
-            const bounds = state.root.getBoundingClientRect();
-            const devicePixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        function drawFace(ctx, points, unit, baseFill, accent) {
+            const xs = points.map((point) => point.x);
+            const ys = points.map((point) => point.y);
+            const minX = Math.min(...xs);
+            const maxX = Math.max(...xs);
+            const minY = Math.min(...ys);
+            const maxY = Math.max(...ys);
 
-            state.width = Math.max(bounds.width, 1);
-            state.height = Math.max(bounds.height, 1);
-            state.canvas.width = Math.round(state.width * devicePixelRatio);
-            state.canvas.height = Math.round(state.height * devicePixelRatio);
-            state.ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+            withPolygon(ctx, points, () => {
+                ctx.fillStyle = baseFill;
+                ctx.fillRect(minX - unit, minY - unit, (maxX - minX) + unit * 2, (maxY - minY) + unit * 2);
+
+                ctx.fillStyle = makeLinear(ctx, minX, minY, maxX, maxY, [
+                    [0, 'rgba(255, 255, 255, 0.34)'],
+                    [0.22, 'rgba(255, 255, 255, 0)'],
+                    [0.74, 'rgba(255, 255, 255, 0)'],
+                    [1, 'rgba(255, 255, 255, 0.22)'],
+                ]);
+                ctx.fillRect(minX - unit, minY - unit, (maxX - minX) + unit * 2, (maxY - minY) + unit * 2);
+
+                ctx.fillStyle = accent;
+                ctx.globalCompositeOperation = 'multiply';
+                ctx.fillRect(minX - unit, minY - unit, (maxX - minX) + unit * 2, (maxY - minY) + unit * 2);
+                ctx.globalCompositeOperation = 'source-over';
+            });
         }
 
-        function drawFaceDetails(ctx, state, points) {
-            if (!markImage.complete) {
+        function drawIdleShimmer(ctx, points, centerX, centerY, radius, intensity = 1) {
+            const xs = points.map((point) => point.x);
+            const ys = points.map((point) => point.y);
+            const minX = Math.min(...xs);
+            const maxX = Math.max(...xs);
+            const minY = Math.min(...ys);
+            const maxY = Math.max(...ys);
+
+            withPolygon(ctx, points, () => {
+                ctx.fillStyle = makeRadial(ctx, centerX, centerY, radius * 0.08, radius, [
+                    [0, `rgba(255, 255, 255, ${0.34 * intensity})`],
+                    [0.22, `rgba(214, 248, 255, ${0.2 * intensity})`],
+                    [0.48, `rgba(110, 226, 255, ${0.14 * intensity})`],
+                    [1, 'rgba(110, 226, 255, 0)'],
+                ]);
+                ctx.fillRect(minX - radius, minY - radius, (maxX - minX) + radius * 2, (maxY - minY) + radius * 2);
+            });
+        }
+
+        function drawPointerCaustic(ctx, points, centerX, centerY, radius, ringWidth = 0.32) {
+            const xs = points.map((point) => point.x);
+            const ys = points.map((point) => point.y);
+            const minX = Math.min(...xs);
+            const maxX = Math.max(...xs);
+            const minY = Math.min(...ys);
+            const maxY = Math.max(...ys);
+
+            withPolygon(ctx, points, () => {
+                ctx.fillStyle = makeRadial(ctx, centerX, centerY, radius * ringWidth, radius, [
+                    [0, 'rgba(255, 255, 255, 1)'],
+                    [0.16, 'rgba(255, 255, 255, 0.96)'],
+                    [0.28, 'rgba(255, 255, 255, 0.45)'],
+                    [0.46, 'rgba(69, 90, 228, 0.58)'],
+                    [0.7, 'rgba(95, 214, 255, 0.12)'],
+                    [1, 'rgba(95, 214, 255, 0)'],
+                ]);
+                ctx.fillRect(minX - radius, minY - radius, (maxX - minX) + radius * 2, (maxY - minY) + radius * 2);
+            });
+        }
+
+        function drawLogo(ctx, points, unit) {
+            if (!logoImage.complete) {
                 return;
             }
 
-            const leftCenterX = (points.topLeft.x + points.bottomCenter.x + points.leftOuter.x + points.topInner.x) / 4;
-            const leftCenterY = (points.topLeft.y + points.bottomCenter.y + points.leftOuter.y + points.topInner.y) / 4;
+            withPolygon(ctx, points, () => {
+                const centerX = (points[0].x + points[1].x + points[2].x + points[3].x) / 4;
+                const centerY = (points[0].y + points[1].y + points[2].y + points[3].y) / 4;
 
-            ctx.save();
-            ctx.translate(leftCenterX, leftCenterY);
-            ctx.rotate(-0.38);
-            ctx.globalAlpha = 0.96;
-            ctx.drawImage(markImage, -state.unit * 0.42, -state.unit * 0.28, state.unit * 0.84, state.unit * 0.58);
-            ctx.restore();
-
-            const rightCenterX = (points.topRight.x + points.bottomCenter.x + points.rightOuter.x + points.topInner.x) / 4;
-            const rightCenterY = (points.topRight.y + points.bottomCenter.y + points.rightOuter.y + points.topInner.y) / 4;
-
-            ctx.save();
-            ctx.translate(rightCenterX, rightCenterY);
-            ctx.rotate(-0.22);
-            ctx.scale(1, 0.92);
-            ctx.fillStyle = '#2d72d8';
-            ctx.shadowBlur = state.unit * 0.14;
-            ctx.shadowColor = 'rgba(255, 255, 255, 0.6)';
-            ctx.font = `italic 700 ${state.unit * 0.42}px Inter, sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText('apis', 0, 0);
-            ctx.restore();
+                ctx.save();
+                ctx.translate(centerX - unit * 0.1, centerY + unit * 0.04);
+                ctx.rotate(-0.5);
+                ctx.globalAlpha = 0.92;
+                ctx.drawImage(logoImage, -unit * 0.55, -unit * 0.34, unit * 1.1, unit * 0.72);
+                ctx.restore();
+            });
         }
 
-        function draw(state, now) {
-            const ctx = state.ctx;
+        function drawApisText(ctx, points, unit) {
+            withPolygon(ctx, points, () => {
+                const centerX = (points[0].x + points[1].x + points[2].x + points[3].x) / 4;
+                const centerY = (points[0].y + points[1].y + points[2].y + points[3].y) / 4;
 
-            if (!ctx) {
-                return;
-            }
+                ctx.save();
+                ctx.translate(centerX + unit * 0.08, centerY + unit * 0.18);
+                ctx.rotate(-0.22);
+                ctx.scale(1.02, 0.98);
+                ctx.font = `italic 800 ${unit * 0.58}px Inter, sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.lineJoin = 'round';
+                ctx.lineWidth = unit * 0.08;
+                ctx.strokeStyle = 'rgba(46, 92, 196, 0.95)';
+                ctx.fillStyle = 'rgba(187, 234, 255, 0.96)';
+                ctx.shadowBlur = unit * 0.18;
+                ctx.shadowColor = 'rgba(137, 220, 255, 0.55)';
+                ctx.strokeText('apis', 0, 0);
+                ctx.fillText('apis', 0, 0);
+                ctx.restore();
+            });
+        }
 
-            const elapsed = (now - state.startTime) / 1000;
-            const driftX = state.pointer.x * state.width * 0.04;
-            const driftY = state.pointer.y * state.height * 0.03;
-            const floatY = Math.sin(elapsed * 1.15) * state.height * 0.018;
-            const pulse = (Math.sin(elapsed * 1.8) + 1) * 0.5;
-            const centerX = state.width * 0.57 + driftX;
-            const centerY = state.height * 0.53 + driftY + floatY;
-            const unit = Math.min(state.width, state.height) * 0.23;
+        function render(state, now) {
+            const { ctx, width, height, pointer } = state;
+            const elapsed = (now - state.startedAt) / 1000;
+            const unit = Math.min(width, height) * 0.215;
+            const centerX = width * 0.525;
+            const centerY = height * 0.35 + Math.sin(elapsed * 1.1) * unit * 0.03;
 
-            state.unit = unit;
+            ctx.clearRect(0, 0, width, height);
 
-            ctx.clearRect(0, 0, state.width, state.height);
-
-            ctx.save();
-            ctx.fillStyle = createRadial(ctx, centerX, centerY, unit * 0.15, unit * 1.8, [
-                [0, 'rgba(255, 255, 255, 0.36)'],
-                [0.18, 'rgba(113, 226, 255, 0.34)'],
-                [0.45, 'rgba(54, 122, 255, 0.24)'],
-                [1, 'rgba(54, 122, 255, 0)'],
+            ctx.fillStyle = makeRadial(ctx, centerX, centerY + unit * 0.9, unit * 0.1, unit * 2.5, [
+                [0, 'rgba(255, 255, 255, 0.18)'],
+                [0.24, 'rgba(123, 229, 255, 0.18)'],
+                [0.6, 'rgba(55, 112, 255, 0.14)'],
+                [1, 'rgba(55, 112, 255, 0)'],
             ]);
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, unit * 1.8, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.restore();
+            ctx.fillRect(0, 0, width, height);
 
             const points = {
-                topBack: { x: centerX, y: centerY - unit * 1.08 },
-                topRight: { x: centerX + unit * 1.18, y: centerY - unit * 0.42 },
-                topInner: { x: centerX, y: centerY + unit * 0.04 },
-                topLeft: { x: centerX - unit * 1.18, y: centerY - unit * 0.42 },
-                leftOuter: { x: centerX - unit * 1.16, y: centerY + unit * 1.26 },
-                bottomCenter: { x: centerX, y: centerY + unit * 0.84 },
-                rightOuter: { x: centerX + unit * 1.16, y: centerY + unit * 1.26 },
+                topBack: { x: centerX, y: centerY - unit * 1.18 },
+                topRight: { x: centerX + unit * 1.34, y: centerY - unit * 0.52 },
+                topFront: { x: centerX, y: centerY + unit * 0.08 },
+                topLeft: { x: centerX - unit * 1.34, y: centerY - unit * 0.52 },
+                leftBottom: { x: centerX - unit * 1.28, y: centerY + unit * 1.46 },
+                bottomCenter: { x: centerX, y: centerY + unit * 2.1 },
+                rightBottom: { x: centerX + unit * 1.28, y: centerY + unit * 1.46 },
             };
 
-            const topGradient = createGradient(
+            const topFace = [points.topBack, points.topRight, points.topFront, points.topLeft];
+            const leftFace = [points.topLeft, points.topFront, points.bottomCenter, points.leftBottom];
+            const rightFace = [points.topRight, points.topFront, points.bottomCenter, points.rightBottom];
+
+            drawFace(
                 ctx,
-                points.topLeft.x,
-                points.topBack.y,
-                points.topRight.x,
-                points.topInner.y,
-                [
-                    [0, 'rgba(210, 245, 255, 0.56)'],
-                    [0.35, 'rgba(118, 235, 255, 0.82)'],
-                    [0.7, 'rgba(128, 181, 255, 0.78)'],
-                    [1, 'rgba(245, 249, 255, 0.66)'],
-                ]
+                topFace,
+                unit,
+                makeLinear(ctx, points.topLeft.x, points.topBack.y, points.topRight.x, points.topFront.y, [
+                    [0, 'rgba(244, 251, 255, 0.96)'],
+                    [0.22, 'rgba(159, 240, 255, 0.92)'],
+                    [0.56, 'rgba(67, 108, 239, 0.92)'],
+                    [1, 'rgba(248, 252, 255, 0.98)'],
+                ]),
+                makeRadial(ctx, centerX, centerY - unit * 0.28, unit * 0.1, unit * 1.35, [
+                    [0, 'rgba(17, 29, 72, 0.78)'],
+                    [0.4, 'rgba(26, 58, 132, 0.48)'],
+                    [1, 'rgba(17, 29, 72, 0)'],
+                ])
             );
 
-            const leftGradient = createGradient(
+            drawFace(
                 ctx,
-                points.topLeft.x,
-                points.topLeft.y,
-                points.leftOuter.x,
-                points.leftOuter.y,
-                [
-                    [0, 'rgba(201, 246, 255, 0.6)'],
-                    [0.42, 'rgba(114, 195, 255, 0.78)'],
-                    [1, 'rgba(255, 255, 255, 0.92)'],
-                ]
+                leftFace,
+                unit,
+                makeLinear(ctx, points.topLeft.x, points.topLeft.y, points.leftBottom.x, points.leftBottom.y, [
+                    [0, 'rgba(251, 253, 255, 0.99)'],
+                    [0.16, 'rgba(163, 240, 255, 0.84)'],
+                    [0.58, 'rgba(28, 45, 100, 0.94)'],
+                    [1, 'rgba(255, 255, 255, 0.99)'],
+                ]),
+                makeRadial(ctx, centerX - unit * 0.56, centerY + unit * 0.86, unit * 0.08, unit * 1.45, [
+                    [0, 'rgba(22, 34, 83, 0.84)'],
+                    [0.48, 'rgba(36, 67, 149, 0.28)'],
+                    [1, 'rgba(22, 34, 83, 0)'],
+                ])
             );
 
-            const rightGradient = createGradient(
+            drawFace(
                 ctx,
-                points.topRight.x,
-                points.topRight.y,
-                points.rightOuter.x,
-                points.rightOuter.y,
-                [
-                    [0, 'rgba(160, 241, 255, 0.68)'],
-                    [0.46, 'rgba(88, 130, 255, 0.76)'],
-                    [1, 'rgba(255, 255, 255, 0.94)'],
-                ]
+                rightFace,
+                unit,
+                makeLinear(ctx, points.topRight.x, points.topRight.y, points.rightBottom.x, points.rightBottom.y, [
+                    [0, 'rgba(251, 253, 255, 0.99)'],
+                    [0.18, 'rgba(167, 239, 255, 0.82)'],
+                    [0.56, 'rgba(26, 45, 102, 0.95)'],
+                    [1, 'rgba(255, 255, 255, 0.99)'],
+                ]),
+                makeRadial(ctx, centerX + unit * 0.64, centerY + unit * 0.88, unit * 0.08, unit * 1.5, [
+                    [0, 'rgba(22, 34, 83, 0.84)'],
+                    [0.48, 'rgba(36, 67, 149, 0.28)'],
+                    [1, 'rgba(22, 34, 83, 0)'],
+                ])
             );
 
-            const edgeStroke = createGradient(
-                ctx,
-                centerX - unit * 1.4,
-                centerY - unit * 1.1,
-                centerX + unit * 1.3,
-                centerY + unit * 1.2,
-                [
-                    [0, 'rgba(240, 250, 255, 0.92)'],
-                    [0.3, 'rgba(103, 236, 255, 0.98)'],
-                    [0.66, 'rgba(70, 124, 255, 0.92)'],
-                    [1, 'rgba(255, 255, 255, 0.92)'],
-                ]
-            );
+            const idleTopX = centerX + Math.sin(elapsed * 0.82) * unit * 0.62;
+            const idleTopY = centerY - unit * 0.26 + Math.cos(elapsed * 0.96) * unit * 0.12;
+            const idleLeftX = centerX - unit * 0.76 + Math.sin(elapsed * 0.7 + 0.8) * unit * 0.24;
+            const idleLeftY = centerY + unit * 1.06 + Math.cos(elapsed * 0.94 + 0.5) * unit * 0.3;
+            const idleRightX = centerX + unit * 0.76 + Math.sin(elapsed * 0.74 + 2.1) * unit * 0.24;
+            const idleRightY = centerY + unit * 1.02 + Math.cos(elapsed * 0.9 + 1.2) * unit * 0.3;
 
-            drawPath(ctx, [points.topBack, points.topRight, points.topInner, points.topLeft], {
-                fill: topGradient,
-                stroke: edgeStroke,
-                lineWidth: unit * 0.08,
-                shadowBlur: unit * (0.22 + pulse * 0.05),
-                shadowColor: 'rgba(114, 215, 255, 0.75)',
-            });
+            drawIdleShimmer(ctx, topFace, idleTopX, idleTopY, unit * 1.02, 1);
+            drawIdleShimmer(ctx, leftFace, idleLeftX, idleLeftY, unit * 0.96, 0.75);
+            drawIdleShimmer(ctx, rightFace, idleRightX, idleRightY, unit * 0.96, 0.8);
 
-            drawPath(ctx, [points.topLeft, points.topInner, points.bottomCenter, points.leftOuter], {
-                fill: leftGradient,
-                stroke: edgeStroke,
-                lineWidth: unit * 0.08,
-                shadowBlur: unit * (0.18 + pulse * 0.04),
-                shadowColor: 'rgba(114, 215, 255, 0.65)',
-            });
+            const pointerTopX = centerX + pointer.x * unit * 0.88;
+            const pointerTopY = centerY - unit * 0.3 + pointer.y * unit * 0.28;
+            const pointerLeftX = centerX - unit * 0.68 + pointer.x * unit * 0.32;
+            const pointerLeftY = centerY + unit * 1.04 + pointer.y * unit * 0.52;
+            const pointerRightX = centerX + unit * 0.68 + pointer.x * unit * 0.32;
+            const pointerRightY = centerY + unit * 1.02 + pointer.y * unit * 0.52;
 
-            drawPath(ctx, [points.topRight, points.topInner, points.bottomCenter, points.rightOuter], {
-                fill: rightGradient,
-                stroke: edgeStroke,
-                lineWidth: unit * 0.08,
-                shadowBlur: unit * (0.18 + pulse * 0.04),
-                shadowColor: 'rgba(78, 130, 255, 0.62)',
-            });
+            drawPointerCaustic(ctx, topFace, pointerTopX, pointerTopY, unit * 0.9, 0.28);
+            drawPointerCaustic(ctx, leftFace, pointerLeftX, pointerLeftY, unit * 0.72, 0.36);
+            drawPointerCaustic(ctx, rightFace, pointerRightX, pointerRightY, unit * 0.72, 0.36);
 
-            drawWire(ctx, points.topBack, points.bottomCenter, {
-                stroke: 'rgba(255, 255, 255, 0.78)',
-                lineWidth: unit * 0.045,
-                shadowBlur: unit * 0.12,
-                shadowColor: 'rgba(166, 245, 255, 0.55)',
-            });
+            const edgeStroke = makeLinear(ctx, centerX - unit * 1.5, centerY - unit * 1.2, centerX + unit * 1.5, centerY + unit * 2.1, [
+                [0, 'rgba(255, 255, 255, 0.98)'],
+                [0.26, 'rgba(118, 234, 255, 0.98)'],
+                [0.68, 'rgba(70, 102, 255, 0.98)'],
+                [1, 'rgba(255, 255, 255, 0.98)'],
+            ]);
 
-            drawWire(ctx, points.topLeft, points.leftOuter, {
-                stroke: 'rgba(247, 252, 255, 0.85)',
-                lineWidth: unit * 0.04,
-            });
+            drawPolygonStroke(ctx, topFace, edgeStroke, unit * 0.082, unit * 0.24, 'rgba(127, 225, 255, 0.78)');
+            drawPolygonStroke(ctx, leftFace, edgeStroke, unit * 0.082, unit * 0.22, 'rgba(127, 225, 255, 0.72)');
+            drawPolygonStroke(ctx, rightFace, edgeStroke, unit * 0.082, unit * 0.22, 'rgba(102, 127, 255, 0.74)');
+            drawPolygonStroke(ctx, topFace, 'rgba(255, 255, 255, 0.86)', unit * 0.024);
+            drawPolygonStroke(ctx, leftFace, 'rgba(255, 255, 255, 0.84)', unit * 0.024);
+            drawPolygonStroke(ctx, rightFace, 'rgba(255, 255, 255, 0.84)', unit * 0.024);
 
-            drawWire(ctx, points.topRight, points.rightOuter, {
-                stroke: 'rgba(245, 250, 255, 0.88)',
-                lineWidth: unit * 0.04,
-            });
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(points.topFront.x, points.topFront.y);
+            ctx.lineTo(points.bottomCenter.x, points.bottomCenter.y);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.94)';
+            ctx.lineWidth = unit * 0.052;
+            ctx.shadowBlur = unit * 0.16;
+            ctx.shadowColor = 'rgba(173, 240, 255, 0.62)';
+            ctx.stroke();
+            ctx.restore();
 
-            drawFaceDetails(ctx, state, points);
+            drawLogo(ctx, leftFace, unit);
+            drawApisText(ctx, rightFace, unit);
         }
 
-        function setup(root) {
+        function mount(root) {
             if (root.dataset.apisBoxMounted === 'true') {
                 return;
             }
@@ -275,61 +320,80 @@
                 return;
             }
 
+            const ctx = canvas.getContext('2d');
+
+            if (!ctx) {
+                return;
+            }
+
             root.dataset.apisBoxMounted = 'true';
 
             const state = {
                 root,
                 canvas,
-                ctx: canvas.getContext('2d'),
-                startTime: performance.now(),
+                ctx,
+                width: 0,
+                height: 0,
+                startedAt: performance.now(),
                 pointer: { x: 0, y: 0 },
-                frame: 0,
             };
 
-            const handleMove = (event) => {
-                const bounds = root.getBoundingClientRect();
+            const resize = () => {
+                const rect = root.getBoundingClientRect();
+                const ratio = Math.min(window.devicePixelRatio || 1, 2);
 
-                state.pointer.x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
-                state.pointer.y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+                state.width = Math.max(rect.width, 1);
+                state.height = Math.max(rect.height, 1);
+                canvas.width = Math.round(state.width * ratio);
+                canvas.height = Math.round(state.height * ratio);
+                ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
             };
 
-            const handleLeave = () => {
-                state.pointer.x *= 0.35;
-                state.pointer.y *= 0.35;
+            const onPointerMove = (event) => {
+                const rect = root.getBoundingClientRect();
+                const x = (event.clientX - rect.left) / rect.width;
+                const y = (event.clientY - rect.top) / rect.height;
+
+                state.pointer.x = (x - 0.5) * 2;
+                state.pointer.y = (y - 0.5) * 2;
             };
 
-            const resizeObserver = new ResizeObserver(() => {
-                resize(state);
+            const onPointerLeave = () => {
+                state.pointer.x *= 0.2;
+                state.pointer.y *= 0.2;
+            };
+
+            const observer = new ResizeObserver(() => {
+                resize();
             });
 
-            resizeObserver.observe(root);
-            root.addEventListener('pointermove', handleMove);
-            root.addEventListener('pointerleave', handleLeave);
+            observer.observe(root);
+            root.addEventListener('pointermove', onPointerMove);
+            root.addEventListener('pointerleave', onPointerLeave);
+            resize();
 
-            resize(state);
-
-            const render = (now) => {
-                state.pointer.x *= 0.94;
-                state.pointer.y *= 0.94;
-                draw(state, now);
-                state.frame = window.requestAnimationFrame(render);
+            const frame = (now) => {
+                state.pointer.x *= 0.95;
+                state.pointer.y *= 0.95;
+                render(state, now);
+                state.raf = window.requestAnimationFrame(frame);
             };
 
-            state.frame = window.requestAnimationFrame(render);
+            state.raf = window.requestAnimationFrame(frame);
         }
 
-        window.__apisBoxTemplate = {
+        window.__apisBoxRenderer = {
             scan() {
-                document.querySelectorAll('[data-apis-box-template]').forEach(setup);
+                document.querySelectorAll('[data-apis-box]').forEach(mount);
             },
         };
 
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => {
-                window.__apisBoxTemplate.scan();
+                window.__apisBoxRenderer.scan();
             }, { once: true });
         } else {
-            window.__apisBoxTemplate.scan();
+            window.__apisBoxRenderer.scan();
         }
     })();
 </script>
