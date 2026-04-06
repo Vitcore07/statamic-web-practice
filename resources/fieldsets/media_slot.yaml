@@ -1,16 +1,6 @@
 title: 'Media Slot'
 fields:
   -
-    handle: media_type
-    field:
-      type: button_group
-      display: 'Media Type'
-      default: image
-      localizable: true
-      options:
-        image: Image
-        template: Template
-  -
     handle: image
     field:
       type: assets
@@ -18,15 +8,3 @@ fields:
       container: assets
       max_files: 1
       localizable: true
-      if:
-        media_type: 'equals image'
-  -
-    handle: media_template
-    field:
-      type: template
-      display: 'Media Template'
-      localizable: true
-      if:
-        media_type: 'equals template'
-      folder: selectable_templates
-      hide_partials: false
