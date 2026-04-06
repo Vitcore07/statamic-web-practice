@@ -4,13 +4,16 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "format:antlers": "prettier --write \"resources/**/*.antlers.html\""
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
         "axios": "^1.11.0",
         "concurrently": "^9.0.1",
         "laravel-vite-plugin": "^3.0.0",
+        "prettier": "^3.8.1",
+        "prettier-plugin-antlers": "^2.0.5",
         "tailwindcss": "^4.0.0",
         "vite": "^8.0.0"
     },
