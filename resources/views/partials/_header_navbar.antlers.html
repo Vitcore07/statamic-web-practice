@@ -79,27 +79,22 @@
                     </a>
                 {{ /locales }}
             </div>
-
-          {{ nav:header_utility max_depth="1" select="title|url" }}
-            <a
-              href="{{ url }}"
-              class="transition-colors duration-100 px-5 py-2.5 border border-black/10 hover:bg-white rounded-full"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {{ title }}
-            </a>
-          {{ /nav:header_utility }}
-
-          <a
-            href="#contact"
-            style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 5px 0px, rgba(255, 255, 255, 0.04) 0px 0.241451px 0.531191px 0px inset, rgba(255, 255, 255, 0.3) 0px 2px 4.4px 0px inset"
-            class="block bg-[rgb(57,133,190)] text-white py-2.5 px-5 rounded-full transition-opacity hover:opacity-85">
-            Konzultácia
-          </a>
             {{ header_utility_button }}
                 {{ partial:partials/button_with_icon }}
             {{ /header_utility_button }}
+            <a
+                href="#contact"
+                style="
+                    box-shadow:
+                        rgba(0, 0, 0, 0.15) 0px 2px 5px 0px,
+                        rgba(255, 255, 255, 0.04) 0px 0.241451px 0.531191px 0px
+                            inset,
+                        rgba(255, 255, 255, 0.3) 0px 2px 4.4px 0px inset;
+                "
+                class="block bg-[rgb(57,133,190)] text-white py-2.5 px-5 rounded-full transition-opacity hover:opacity-85"
+            >
+                Konzultácia
+            </a>
 
             <nav aria-label="Primary" class="lg:hidden">
                 <div class="flex flex-wrap items-center justify-end gap-2">
