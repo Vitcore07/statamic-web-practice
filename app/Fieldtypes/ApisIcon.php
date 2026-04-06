@@ -12,6 +12,29 @@ class ApisIcon extends StatamicIcon
 
     protected $indexComponent = 'icon';
 
+    protected function configFieldItems(): array
+    {
+        return [
+            [
+                'display' => __('Selection'),
+                'fields' => [
+                    'set' => [
+                        'display' => __('Icon Set'),
+                        'instructions' => __('statamic::fieldtypes.icon.config.set'),
+                        'type' => 'hidden',
+                        'default' => 'apis',
+                    ],
+                    'default' => [
+                        'display' => __('Default Icon'),
+                        'instructions' => __('statamic::messages.fields_default_instructions'),
+                        'type' => 'text',
+                        'width' => 50,
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function icons()
     {
         $set = $this->iconSet();
