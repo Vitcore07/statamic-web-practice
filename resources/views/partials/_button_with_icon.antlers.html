@@ -1,0 +1,19 @@
+{{ if label && url }}
+    <a
+        href="{{ url }}"
+        class="inline-flex items-center justify-center gap-2 rounded-full border border-black/10 px-5 py-2.5 text-sm font-medium transition-colors duration-100 {{ if variant == 'primary' }}bg-stone-900 text-white hover:bg-stone-800{{ elseif variant == 'ghost' }}border-transparent text-stone-700 hover:bg-stone-100{{ else }}text-stone-700 hover:bg-white{{ /if }} {{ button_classes }}"
+        {{ if new_tab }}target="_blank" rel="noopener noreferrer"{{ /if }}
+    >
+        {{ if icon && icon_position == "left" }}
+            <span class="[&_svg]:size-4 {{ icon_wrapper_classes }}">
+                {{ svg src="icons/{icon}" }}
+            </span>
+        {{ /if }}
+        <span class="{{ label_classes }}">{{ label }}</span>
+        {{ if icon && icon_position == "right" }}
+            <span class="[&_svg]:size-4 {{ icon_wrapper_classes }}">
+                {{ svg src="icons/{icon}" }}
+            </span>
+        {{ /if }}
+    </a>
+{{ /if }}

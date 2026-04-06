@@ -18,7 +18,7 @@ fields:
     handle: icon
     field:
       type: apis_icon
-      display: 'Apis Icon'
+      display: Icon
       localizable: true
       width: 50
   -
@@ -38,7 +38,7 @@ fields:
       type: button_group
       display: Variant
       instructions: 'Use for a small set of semantic button styles. Prefer passing concrete classes through template parameters when needed.'
-      default: primary
+      default: secondary
       localizable: true
       options:
         primary: Primary
