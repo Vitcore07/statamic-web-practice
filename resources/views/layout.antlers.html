@@ -1144,13 +1144,19 @@
             }
         </style>
 
-    {{ vite src="resources/css/app.css|resources/js/app.js" }}
-</head>
-<body class="min-h-screen bg-[#f0f0f0] text-stone-900 antialiased">
-    {{ partial:partials/header_navbar }}
-
-    <div class="relative min-h-screen max-w-[1150px] mx-auto">
-        {{ template_content }}
-    </div>
-</body>
+        {{ vite src="resources/css/app.css|resources/js/app.js" }}
+    </head>
+    <body class="min-h-screen bg-[#f0f0f0] text-stone-900 antialiased">
+        {{ partial:partials/header_navbar }}
+            {{# This will be most likely dynamic in the future per site #}}
+            {{ slot:after }}
+                {{ partial:partials/primary_cta }}
+                    {{ "Konzultácia" | trans }}
+                {{ /partial:partials/primary_cta }}
+            {{ /slot:after }}
+        {{ /partial:partials/header_navbar }}
+        <div class="relative min-h-screen max-w-[1150px] mx-auto">
+            {{ template_content }}
+        </div>
+    </body>
 </html>
