@@ -1,0 +1,14 @@
+tree:
+  -
+    id: 4f1a1976-a2ec-4f0a-a589-d55fe123d517
+    title: Applications
+    url: 'entry::e34234b9-520b-437b-aca0-e3f7366f8554'
+
+  -
+    id: 4f1a1976-a2ec-4f0a-a589-d55fa123d517
+    title: About us
+    url: 'entry::e34234b9-520b-437b-aca0-e3f7366f8554'
+
+  - id: 4f1a1976-a2ec-4f0a-a589-d55fa123d518
+    title: References
+    url: 'entry::e34234b9-520b-437b-aca0-e3f7366f8554'
