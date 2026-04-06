@@ -34,17 +34,6 @@
         </nav>
 
         <div class="flex shrink-0 items-center gap-3">
-            {{ nav:header_utility max_depth="1" select="title|url" }}
-                <a
-                    href="{{ url }}"
-                    class="hidden text-[1.02rem] font-medium tracking-tight text-stone-700 transition hover:text-stone-950 lg:inline-flex"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    {{ title }}
-                </a>
-            {{ /nav:header_utility }}
-
             <div class="hidden items-center rounded-full border border-stone-200 bg-white p-1 lg:flex">
                 {{ locales sort="locale:lang:asc" current_first="false" }}
                     <a
@@ -56,12 +45,23 @@
                 {{ /locales }}
             </div>
 
+          {{ nav:header_utility max_depth="1" select="title|url" }}
             <a
-                href="#contact"
-                class="hidden items-center rounded-full bg-[#4a97d0] px-8 py-4 text-[1.05rem] font-medium tracking-tight text-white shadow-[0_10px_22px_-12px_rgba(74,151,208,0.9)] transition hover:bg-[#3d8fc3] lg:inline-flex"
+              href="{{ url }}"
+              class="transition-colors duration-100 px-5 py-2.5 border border-black/10 hover:bg-white rounded-full"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-                Konzultacia
+              {{ title }}
             </a>
+          {{ /nav:header_utility }}
+
+          <a
+            href="#contact"
+            style="box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 5px 0px, rgba(255, 255, 255, 0.04) 0px 0.241451px 0.531191px 0px inset, rgba(255, 255, 255, 0.3) 0px 2px 4.4px 0px inset"
+            class="block bg-[rgb(57,133,190)] text-white py-2.5 px-5 rounded-full transition-opacity hover:opacity-85">
+            Konzultácia
+          </a>
 
             <nav aria-label="Primary" class="lg:hidden">
                 <div class="flex flex-wrap items-center justify-end gap-2">
