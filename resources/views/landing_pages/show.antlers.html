@@ -1,7 +1,9 @@
-{{ page_sections }}
-    {{ if type == 'hero_section' }}
-        {{ class = '' }}
-        {{ content_class = 'pt-15' }}
-    {{ endif }}
-    {{ partial src="partials/{type}" :class="class" :content_class="content_class" }}
-{{ /page_sections }}
+<div class="bg-white">
+    {{ page_sections }}
+        {{ if type == 'hero_section' }}
+            {{ class = '' }}
+            {{ content_class = 'pt-15' }}
+        {{ endif }}
+        {{ partial src="partials/{type}" :class="class" :content_class="content_class" }}
+    {{ /page_sections }}
+</div>
