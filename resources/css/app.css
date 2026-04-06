@@ -8,3 +8,7 @@
 @theme {
     --font-sans: "Inter", "Inter Placeholder", sans-serif;
 }
+
+.title-font {
+    font-family: "Mackinac-Book Regular Regular", "Mackinac-Book Regular Regular Placeholder", sans-serif;
+}

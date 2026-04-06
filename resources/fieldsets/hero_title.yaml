@@ -7,12 +7,6 @@ fields:
       display: Title
       localizable: true
   -
-    handle: subtitle
-    field:
-      type: textarea
-      display: Subtitle
-      localizable: true
-  -
     handle: image_position
     field:
       type: button_group
@@ -22,6 +16,27 @@ fields:
       options:
         left: Left
         right: Right
+  -
+    handle: subtitle
+    field:
+      buttons:
+        - h2
+        - h3
+        - bold
+        - italic
+        - unorderedlist
+        - orderedlist
+        - removeformat
+        - quote
+        - anchor
+        - image
+        - table
+        - underline
+      container: assets
+      remove_empty_nodes: false
+      type: bard
+      display: Subtitle
+      localizable: false
   -
     import: media_slot
   -
