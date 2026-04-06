@@ -5,6 +5,7 @@
     x-bind:class="{ 'bg-[#f0f0f0]': scrolled }"
     class="sticky top-0 z-50 w-full transition-colors duration-200"
 >
+    {{ header_utility_button = header_settings:buttons | where('handle', 'login') | first ?? (header_settings:buttons | first) }}
     <div
         class="relative mx-auto flex max-w-[1150px] items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-10"
     >
@@ -96,20 +97,15 @@
             class="block bg-[rgb(57,133,190)] text-white py-2.5 px-5 rounded-full transition-opacity hover:opacity-85">
             Konzultácia
           </a>
+            {{ header_utility_button }}
+                {{ partial:partials/button_with_icon }}
+            {{ /header_utility_button }}
 
             <nav aria-label="Primary" class="lg:hidden">
                 <div class="flex flex-wrap items-center justify-end gap-2">
-                    {{ nav:header_utility max_depth="1" select="title|url" }}
-                        <a
-                            href="{{ url }}"
-                            class="rounded-full px-4 py-2 text-sm font-medium text-stone-700 ring-1 ring-stone-200 transition hover:text-stone-950"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            {{ title }}
-                        </a>
-                    {{ /nav:header_utility }}
-
+                    {{ header_utility_button }}
+                        {{ partial:partials/button_with_icon button_classes="px-4 py-2 ring-1 ring-stone-200" }}
+                    {{ /header_utility_button }}
                     {{ locales sort="locale:lang:asc" current_first="false" }}
                         <a
                             href="{{ permalink }}"
