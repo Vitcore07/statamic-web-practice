@@ -1,0 +1,27 @@
+tree:
+  -
+    id: eedcfa42-1724-43c7-96dc-1723ca507e36
+    title: webBox
+    url: '#'
+    data:
+      image: webbox-mark.svg
+      sub_title: 'Systémová správa'
+  -
+    id: 699ab773-00d8-48ee-908d-b9b109c935a5
+    title: webDrive
+    url: '#'
+    data:
+      image: webbox-mark.svg
+      sub_title: 'Kniha jázd'
+  -
+    id: 65e14e19-402a-41cd-afd3-226c33065499
+    title: 'OCR Writer'
+    data:
+      image: webbox-mark.svg
+      sub_title: 'Čítačky dokladov'
+  -
+    id: c19e387e-6d6b-4285-be20-45b5dc5510a5
+    title: Catalogues
+    data:
+      image: webbox-mark.svg
+      sub_title: 'Overovanie dokladov'
