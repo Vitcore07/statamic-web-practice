@@ -1,5 +1,5 @@
 <header
-    x-data="{ scrolled: false }"
+    x-data="{ scrolled: false, mobileMenuOpen: false }"
     x-init="scrolled = window.scrollY > 100"
     x-on:scroll.window="scrolled = window.scrollY > 100"
     x-bind:class="{ 'bg-[#f0f0f0]': scrolled }"
