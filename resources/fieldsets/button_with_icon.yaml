@@ -33,19 +33,6 @@ fields:
         right: Right
       width: 50
   -
-    handle: variant
-    field:
-      type: button_group
-      display: Variant
-      instructions: 'Use for a small set of semantic button styles. Prefer passing concrete classes through template parameters when needed.'
-      default: secondary
-      localizable: true
-      options:
-        primary: Primary
-        secondary: Secondary
-        ghost: Ghost
-      width: 50
-  -
     handle: new_tab
     field:
       type: toggle
