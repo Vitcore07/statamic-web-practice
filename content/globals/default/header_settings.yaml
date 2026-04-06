@@ -3,6 +3,6 @@ buttons:
     handle: login
     label: 'Log in'
     url: 'https://dochadzka.top/'
-    icon: arrow-enter
+    icon: icons/arrow-enter
     icon_position: left
     new_tab: true

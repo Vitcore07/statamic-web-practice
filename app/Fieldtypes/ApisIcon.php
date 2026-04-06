@@ -5,6 +5,7 @@ namespace App\Fieldtypes;
 use Statamic\Facades\Icon as Icons;
 use Statamic\Fieldtypes\Icon as StatamicIcon;
 use Statamic\Icons\IconSet;
+use Statamic\Support\Str;
 
 class ApisIcon extends StatamicIcon
 {
@@ -50,11 +51,36 @@ class ApisIcon extends StatamicIcon
             return null;
         }
 
-        return $this->iconSet()->get($value);
+        return $this->iconSet()->get($this->iconName($value));
+    }
+
+    public function preProcess($data)
+    {
+        if (! $data) {
+            return null;
+        }
+
+        return $this->iconName($data);
+    }
+
+    public function process($data)
+    {
+        if (! $data) {
+            return null;
+        }
+
+        return Str::startsWith($data, 'icons/')
+            ? $data
+            : 'icons/'.$data;
     }
 
     protected function iconSet(): IconSet
     {
         return Icons::get($this->config('set', 'apis'));
+    }
+
+    private function iconName(string $value): string
+    {
+        return Str::after($value, 'icons/');
     }
 }
