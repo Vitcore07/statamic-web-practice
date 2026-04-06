@@ -21,6 +21,7 @@ fields:
       display: Icon
       localizable: true
       width: 50
+      set: apis
   -
     handle: icon_position
     field:
