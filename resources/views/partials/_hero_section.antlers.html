@@ -9,7 +9,7 @@
             {{ hero_components }}
                 {{ if type == "hero_title" }}
                     <div
-                        class="grid gap-30 place-items-center items-center justify-center {{ if (media_type == 'image' && image) }}grid-cols-[max-content_max-content]{{ /if }}"
+                        class="grid gap-30 place-items-center items-center justify-center {{ if image }}grid-cols-[max-content_max-content]{{ /if }}"
                     >
                         <div
                             class="{{ if image_position == 'left' }}lg:order-2{{ /if }}"
@@ -50,7 +50,7 @@
                                 </div>
                             {{ /if }}
                         </div>
-                        {{ if media_type == "image" && image }}
+                        {{ if image }}
                             {{ image }}
                                 <img
                                     src="{{ glide:image width="300" height="280" fit="crop_focal" }}"
@@ -62,7 +62,7 @@
                     </div>
                 {{ /if }}
                 {{ if type == "hero_highlights" }}
-                    {{ partial:partials/hero_section/highlights class="mt-20 mx-2 mb-2 radius-[20px]" }}
+                    {{ partial:partials/hero_section/highlights class="mt-20 mx-2 mb-2 rounded-3xl bg-white" }}
                 {{ /if }}
             {{ /hero_components }}
         </div>
