@@ -16,3 +16,8 @@ indent_size = 2
 
 [compose.yaml]
 indent_size = 4
+
+[*.antlers.html]
+ij_html_attribute_wrap = normal
+ij_html_new_line_before_first_attribute = never
+ij_html_new_line_after_last_attribute = never
