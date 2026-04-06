@@ -23,7 +23,7 @@ fields:
         left: Left
         right: Right
   -
-    import: blocks.media_slot
+    import: media_slot
   -
     handle: cta_label
     field:

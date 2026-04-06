@@ -21,4 +21,4 @@ fields:
       localizable: true
       fields:
         -
-          import: blocks.highlight_card
+          import: highlight_card

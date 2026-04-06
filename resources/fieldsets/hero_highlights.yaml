@@ -10,4 +10,4 @@ fields:
       localizable: true
       fields:
         -
-          import: blocks.hero_highlight
+          import: hero_highlight

@@ -1,0 +1,54 @@
+title: 'Button with Icon'
+fields:
+  -
+    handle: label
+    field:
+      type: text
+      display: Label
+      localizable: true
+      width: 50
+  -
+    handle: url
+    field:
+      type: link
+      display: URL
+      localizable: true
+      width: 50
+  -
+    handle: icon
+    field:
+      type: icon
+      display: Icon
+      localizable: true
+      width: 50
+  -
+    handle: icon_position
+    field:
+      type: button_group
+      display: 'Icon Position'
+      default: left
+      localizable: true
+      options:
+        left: Left
+        right: Right
+      width: 50
+  -
+    handle: variant
+    field:
+      type: button_group
+      display: Variant
+      instructions: 'Use for a small set of semantic button styles. Prefer passing concrete classes through template parameters when needed.'
+      default: primary
+      localizable: true
+      options:
+        primary: Primary
+        secondary: Secondary
+        ghost: Ghost
+      width: 50
+  -
+    handle: new_tab
+    field:
+      type: toggle
+      display: 'Open in New Tab'
+      localizable: true
+      width: 50

@@ -32,26 +32,26 @@ tabs:
                       image: image-with-copy-preview.svg
                       fields:
                         -
-                          import: blocks.image_with_copy
+                          import: image_with_copy
                     hero_section:
                       display: 'Hero Section'
                       icon: layout-top-panel-1
                       fields:
                         -
-                          import: blocks.hero_section
+                          import: hero_section
                     highlight_card:
                       display: 'Highlight Card'
                       icon: media-image-picture-gallery
                       fields:
                         -
-                          import: blocks.highlight_card
+                          import: highlight_card
                     highlight_cards:
                       display: 'Highlight Cards'
                       icon: layout-grid-dots
                       image: highlight-cards-preview.svg
                       fields:
                         -
-                          import: blocks.highlight_cards
+                          import: highlight_cards
   sidebar:
     display: Sidebar
     sections:

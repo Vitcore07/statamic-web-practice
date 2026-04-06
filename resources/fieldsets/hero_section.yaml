@@ -23,10 +23,10 @@ fields:
               icon: text-formatting-wrap-box
               fields:
                 -
-                  import: blocks.hero_title
+                  import: hero_title
             hero_highlights:
               display: 'Hero Highlights'
               icon: favorite-star
               fields:
                 -
-                  import: blocks.hero_highlights
+                  import: hero_highlights
