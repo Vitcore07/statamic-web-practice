@@ -17,11 +17,10 @@ fields:
   -
     handle: icon
     field:
-      type: icon
-      display: Icon
+      type: apis_icon
+      display: 'Apis Icon'
       localizable: true
       width: 50
-      set: apis
   -
     handle: icon_position
     field:
