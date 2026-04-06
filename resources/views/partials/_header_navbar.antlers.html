@@ -30,8 +30,46 @@
             </div>
 
             <div
-                class="pointer-events-none absolute left-0 top-full opacity-0 transition duration-150 group-hover:pointer-events-auto group-hover:opacity-100"
+                x-data="{ open: false, hovered: false }"
+                x-on:click.outside="open = false"
+                x-on:mouseenter="hovered = true"
+                x-on:mouseleave="hovered = false"
+                class="relative hidden shrink-0 text-[#757575] lg:block"
             >
+                <button
+                    type="button"
+                    x-on:click="open = !open"
+                    x-bind:aria-expanded="open.toString()"
+                    class="flex cursor-pointer items-center gap-2 px-4 py-2 text-[1.05rem] font-medium tracking-tight text-stone-800 transition hover:text-stone-950"
+                >
+                    {{ selected_product }}
+                        <div class="min-w-max rounded-xl p-1 text-sm">
+                            <div class="flex gap-3 text-left">
+                                <img
+                                    src="{{ glide:image width='44' fit='crop_focal' }}"
+                                    class="size-11 object-cover"
+                                />
+                                <div class="flex flex-col">
+                                    <p class="text-base text-black">
+                                        {{ title }}
+                                    </p>
+                                    <p class="text-xs">
+                                        BY
+                                        <strong>apis</strong>
+                                        .sk
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {{ /selected_product }}
+                    <span
+                        x-bind:class="open ? 'rotate-180' : ''"
+                        class="flex transform transition duration-150"
+                    >
+                        {{ svg src="icons/chevron-down" class="size-6" }}
+                    </span>
+                </button>
+
                 <div
                     class="rounded-xl flex flex-col gap-2 bg-white px-2 py-2.5 shadow-lg"
                 >
