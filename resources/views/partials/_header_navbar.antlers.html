@@ -10,6 +10,14 @@
                 {{ selected_product = products | where('handle', current_product_handle) | first ?? (products | first) }}
                 {{ selected_product }}
                     {{ partial:partials/headers/_product_card }}
+                        {{ slot:subtitle }}
+                            <p class="text-xs">
+                                BY
+                                <strong>apis</strong>
+                                .sk
+                            </p>
+                        {{ /slot:subtitle }}
+                    {{ /partial:partials/headers/_product_card }}
                 {{ /selected_product }}
                 {{ svg src="chevron-down" class="size-6 transform group-hover:rotate-180" }}
             </div>
@@ -30,7 +38,7 @@
                     <div
                         class="pb-1 flex items-center justify-center gap-2 text-xs w-full mt-2"
                     >
-                        <p>Realizuje firma</p>
+                        <p>{{ "Realizuje firma" | trans }}</p>
                         <img
                             src="{{ glide src='assets/apis-full.avif' height='17' }}"
                             alt="apis logo"
