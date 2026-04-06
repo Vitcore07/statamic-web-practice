@@ -6,13 +6,13 @@
     >
         {{ if icon && icon_position == "left" }}
             <span class="[&_svg]:size-4 {{ icon_wrapper_classes }}">
-                {{ svg src="icons/{icon}" }}
+                {{ svg :src="icon" }}
             </span>
         {{ /if }}
         <span class="{{ label_classes }}">{{ label }}</span>
         {{ if icon && icon_position == "right" }}
             <span class="[&_svg]:size-4 {{ icon_wrapper_classes }}">
-                {{ svg src="icons/{icon}" }}
+                {{ svg :src="icon" }}
             </span>
         {{ /if }}
     </a>
