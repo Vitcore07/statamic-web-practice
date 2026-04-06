@@ -1,6 +1,8 @@
-label: 'Log in'
-url: 'https://dochadzka.top/'
-icon: arrow-enter
-icon_position: left
-variant: secondary
-new_tab: true
+buttons:
+  -
+    handle: login
+    label: 'Log in'
+    url: 'https://dochadzka.top/'
+    icon: arrow-enter
+    icon_position: left
+    new_tab: true
