@@ -3,17 +3,16 @@
         class="flex items-center gap-8 {{ if image && image_position == 'right' }}flex-row-reverse{{ /if }}"
     >
         {{ if image }}
-            <div class="shrink-0">
+            <div class="w-full">
                 {{ image }}
                     <img
                         src="{{ url }}"
                         alt="{{ alt ?? title ?? '' }}"
                         class="block"
-                    >
+                    />
                 {{ /image }}
             </div>
         {{ /if }}
-
         <div class="flex-1 min-w-0">
             {{ content }}
         </div>

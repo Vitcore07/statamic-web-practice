@@ -9,7 +9,7 @@
             class="{{ if content_surface == 'panel' }} w-full rounded-3xl bg-white space-y-6 p-6 text-stone-900 shadow-lg {{ else }}text-white{{ /if }}"
         >
             {{ content }}
-                <div class="{{ if !last }} border-b border-b-black/10 pb-6 {{ endif }}">
+                <div class="{{ if !last && !hide_separator }} border-b border-b-black/10 pb-6 {{ endif }}">
                 {{ if type == 'markdown' && content }}
                     <div
                         class="prose max-w-none {{ if content_surface == 'panel' }}prose-stone{{ else }}prose-invert{{ /if }}"
@@ -35,6 +35,10 @@
 
                 {{ if type == 'image_with_copy' }}
                     {{ partial:partials/image_with_copy }}
+                {{ /if }}
+
+                {{ if type == 'mosaic' }}
+                    {{ partial:partials/mosaic }}
                 {{ /if }}
                 </div>
             {{ /content }}

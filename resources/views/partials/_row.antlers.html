@@ -1,12 +1,17 @@
 <section class="w-full {{ class }}">
     <div class="flex items-center justify-center gap-8">
         {{ items }}
-            <div class="min-w-0 flex-1 justify-center flex flex-col">
+            <div
+                class="min-w-0 justify-center flex flex-col {{ if size == 'large' }}flex-[2]{{ else }}flex-1{{ /if }}"
+            >
                 {{ if type == 'card' }}
                     {{ partial:partials/card class="w-full" }}
                 {{ /if }}
                 {{ if type == 'markdown' && content }}
                     {{ content | markdown }}
+                {{ /if }}
+                {{ if type == 'mosaic' }}
+                    {{ partial:partials/mosaic }}
                 {{ /if }}
             </div>
         {{ /items }}

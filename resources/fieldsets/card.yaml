@@ -35,6 +35,13 @@ fields:
               icon: text-formatting-markdown
               fields:
                 -
+                  handle: hide_separator
+                  field:
+                    type: toggle
+                    display: 'Hide Separator'
+                    default: false
+                    localizable: true
+                -
                   handle: content
                   field:
                     type: markdown
@@ -44,6 +51,13 @@ fields:
               display: 'List with Icons'
               icon: text-formatting-list-bullets
               fields:
+                -
+                  handle: hide_separator
+                  field:
+                    type: toggle
+                    display: 'Hide Separator'
+                    default: false
+                    localizable: true
                 -
                   handle: items
                   field:
@@ -70,4 +84,24 @@ fields:
               icon: media-image-picture-orientation
               fields:
                 -
+                  handle: hide_separator
+                  field:
+                    type: toggle
+                    display: 'Hide Separator'
+                    default: false
+                    localizable: true
+                -
                   import: image_with_copy
+            mosaic:
+              display: Mosaic
+              icon: layout-grid-dots
+              fields:
+                -
+                  handle: hide_separator
+                  field:
+                    type: toggle
+                    display: 'Hide Separator'
+                    default: false
+                    localizable: true
+                -
+                  import: mosaic

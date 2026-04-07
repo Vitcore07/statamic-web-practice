@@ -16,14 +16,50 @@ fields:
               icon: media-image-picture-gallery
               fields:
                 -
+                  handle: size
+                  field:
+                    type: button_group
+                    display: Size
+                    default: normal
+                    localizable: true
+                    options:
+                      normal: Normal
+                      large: Large
+                -
                   import: card
             markdown:
               display: Markdown
               icon: text-formatting-markdown
               fields:
                 -
+                  handle: size
+                  field:
+                    type: button_group
+                    display: Size
+                    default: normal
+                    localizable: true
+                    options:
+                      normal: Normal
+                      large: Large
+                -
                   handle: content
                   field:
                     type: markdown
                     display: Content
                     localizable: true
+            mosaic:
+              display: Mosaic
+              icon: layout-grid-dots
+              fields:
+                -
+                  handle: size
+                  field:
+                    type: button_group
+                    display: Size
+                    default: normal
+                    localizable: true
+                    options:
+                      normal: Normal
+                      large: Large
+                -
+                  import: mosaic

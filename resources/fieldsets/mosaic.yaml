@@ -1,0 +1,60 @@
+title: Mosaic
+fields:
+  -
+    handle: variant
+    field:
+      type: button_group
+      display: Variant
+      default: colored_with_border
+      localizable: true
+      options:
+        colored_with_border: 'Colored with Border'
+        faded: Faded
+  -
+    handle: rows
+    field:
+      type: replicator
+      display: Rows
+      localizable: true
+      collapse: true
+      sets:
+        content:
+          display: Content
+          sets:
+            row:
+              display: Row
+              icon: layout-three-columns
+              fields:
+                -
+                  handle: items
+                  field:
+                    type: replicator
+                    display: Items
+                    localizable: true
+                    collapse: true
+                    sets:
+                      content:
+                        display: Content
+                        sets:
+                          markdown:
+                            display: Markdown
+                            icon: text-formatting-markdown
+                            fields:
+                              -
+                                handle: content
+                                field:
+                                  type: markdown
+                                  display: Content
+                                  localizable: true
+                          image:
+                            display: Image
+                            icon: media-image-picture-orientation
+                            fields:
+                              -
+                                handle: image
+                                field:
+                                  type: assets
+                                  display: Image
+                                  container: assets
+                                  max_files: 1
+                                  localizable: true

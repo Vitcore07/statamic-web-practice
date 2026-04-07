@@ -51,6 +51,12 @@ tabs:
                       fields:
                         -
                           import: row
+                    mosaic:
+                      display: Mosaic
+                      icon: layout-grid-dots
+                      fields:
+                        -
+                          import: mosaic
                     spacer:
                       display: Spacer
                       icon: arrows-diagonal-up-right-down-left-center
