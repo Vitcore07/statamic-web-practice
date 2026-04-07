@@ -1,5 +1,21 @@
-{{ if variant == "red" }}
-    {{ partial:partials/image_with_copy/red }}
-{{ else }}
-    {{ partial:partials/image_with_copy/blue }}
-{{ /if }}
+<section class="mx-auto max-w-6xl {{ class }}">
+    <div
+        class="flex items-center gap-8 {{ if image && image_position == 'right' }}flex-row-reverse{{ /if }}"
+    >
+        {{ if image }}
+            <div class="shrink-0">
+                {{ image }}
+                    <img
+                        src="{{ url }}"
+                        alt="{{ alt ?? title ?? '' }}"
+                        class="block"
+                    >
+                {{ /image }}
+            </div>
+        {{ /if }}
+
+        <div class="flex-1 min-w-0">
+            {{ content }}
+        </div>
+    </div>
+</section>

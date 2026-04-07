@@ -1,17 +1,6 @@
 title: 'Image with Copy'
 fields:
   -
-    handle: variant
-    field:
-      type: button_group
-      display: Variant
-      default: blue
-      localizable: true
-      options:
-        blue: Blue
-        red: Red
-      width: 50
-  -
     handle: image_position
     field:
       type: button_group
@@ -34,7 +23,7 @@ fields:
   -
     handle: content
     field:
-      type: bard
+      type: markdown
       display: Content
       localizable: true
       width: 50

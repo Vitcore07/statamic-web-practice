@@ -5,15 +5,9 @@ published: false
 page_sections:
   -
     id: pTvKTFbQq0YEXSNgCxm-T
-    variant: blue
     image_position: left
-    content:
-      -
-        type: paragraph
-        content:
-          -
-            type: text
-            text: '11111 fdsa fsfd saf '
+    content: |-
+      11111 fdsa fsfd saf
     type: image_with_copy
     enabled: true
 updated_by: '1'

@@ -1,0 +1,43 @@
+<section class="w-full {{ class }}">
+    <div
+        class="overflow-hidden rounded-3xl w-fit bg-white bg-cover bg-center bg-no-repeat p-2"
+        {{ if background_image }}
+            style="background-image: url('{{ glide :src='background_image' width='1200' fit='crop_focal' }}');"
+        {{ /if }}
+    >
+        <div
+            class="{{ if content_surface == 'panel' }} w-full rounded-3xl bg-white space-y-6 p-6 text-stone-900 shadow-lg {{ else }}text-white{{ /if }}"
+        >
+            {{ content }}
+                <div class="{{ if !last }} border-b border-b-black/10 pb-6 {{ endif }}">
+                {{ if type == 'markdown' && content }}
+                    <div
+                        class="prose max-w-none {{ if content_surface == 'panel' }}prose-stone{{ else }}prose-invert{{ /if }}"
+                    >
+                        {{ content | markdown }}
+                    </div>
+                {{ /if }}
+
+                {{ if type == 'icon_list' && items }}
+                    <ul class="grid gap-4">
+                        {{ items }}
+                            <li class="flex items-start gap-3">
+                                {{ if icon }}
+                                    <span class="mt-1 shrink-0 [&_svg]:size-4 text-[#3985be]">
+                                        {{ svg :src="icon" }}
+                                    </span>
+                                {{ /if }}
+                                <span>{{ text }}</span>
+                            </li>
+                        {{ /items }}
+                    </ul>
+                {{ /if }}
+
+                {{ if type == 'image_with_copy' }}
+                    {{ partial:partials/image_with_copy }}
+                {{ /if }}
+                </div>
+            {{ /content }}
+        </div>
+    </div>
+</section>

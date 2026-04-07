@@ -9,8 +9,8 @@ tabs:
             handle: title
             field:
               type: text
-              localizable: true
               required: true
+              localizable: true
               validate:
                 - required
           -
@@ -39,6 +39,12 @@ tabs:
                       fields:
                         -
                           import: hero_section
+                    card:
+                      display: Card
+                      icon: media-image-picture-gallery
+                      fields:
+                        -
+                          import: card
                     highlight_card:
                       display: 'Highlight Card'
                       icon: media-image-picture-gallery
@@ -65,6 +71,7 @@ tabs:
               default: now
               validate:
                 - required
+              localizable: false
           -
             handle: products
             field:
@@ -73,4 +80,5 @@ tabs:
                 - products
               display: Products
               mode: select
+              localizable: false
 title: 'Landing Page'
