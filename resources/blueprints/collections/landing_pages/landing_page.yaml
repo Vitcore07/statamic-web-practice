@@ -45,6 +45,18 @@ tabs:
                       fields:
                         -
                           import: card
+                    row:
+                      display: Row
+                      icon: layout-three-columns
+                      fields:
+                        -
+                          import: row
+                    spacer:
+                      display: Spacer
+                      icon: arrows-diagonal-up-right-down-left-center
+                      fields:
+                        -
+                          import: spacer
                     highlight_card:
                       display: 'Highlight Card'
                       icon: media-image-picture-gallery

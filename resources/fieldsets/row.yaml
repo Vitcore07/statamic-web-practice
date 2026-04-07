@@ -1,0 +1,29 @@
+title: Row
+fields:
+  -
+    handle: items
+    field:
+      type: replicator
+      display: Items
+      localizable: true
+      collapse: true
+      sets:
+        content:
+          display: Content
+          sets:
+            card:
+              display: Card
+              icon: media-image-picture-gallery
+              fields:
+                -
+                  import: card
+            markdown:
+              display: Markdown
+              icon: text-formatting-markdown
+              fields:
+                -
+                  handle: content
+                  field:
+                    type: markdown
+                    display: Content
+                    localizable: true

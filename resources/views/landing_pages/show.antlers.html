@@ -1,9 +1,13 @@
 <div class="bg-white rounded-t-4xl">
     {{ page_sections }}
+        {{ wrapper_class = 'px-16' }}
         {{ if type == 'hero_section' }}
+            {{ wrapper_class = '' }}
             {{ class = '' }}
             {{ content_class = 'pt-15' }}
         {{ endif }}
-        {{ partial src="partials/{type}" :class="class" :content_class="content_class" }}
+        <div class="{{ wrapper_class }}">
+            {{ partial src="partials/{type}" :class="class" :content_class="content_class" }}
+        </div>
     {{ /page_sections }}
 </div>

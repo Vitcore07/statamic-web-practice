@@ -1,0 +1,14 @@
+<section class="w-full {{ class }}">
+    <div class="flex items-center justify-center gap-8">
+        {{ items }}
+            <div class="min-w-0 flex-1 justify-center flex flex-col">
+                {{ if type == 'card' }}
+                    {{ partial:partials/card class="w-full" }}
+                {{ /if }}
+                {{ if type == 'markdown' && content }}
+                    {{ content | markdown }}
+                {{ /if }}
+            </div>
+        {{ /items }}
+    </div>
+</section>

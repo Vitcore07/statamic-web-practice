@@ -1,0 +1,11 @@
+title: Spacer
+fields:
+  -
+    handle: height
+    field:
+      type: text
+      display: Height
+      instructions: 'Value in rem.'
+      default: '1'
+      localizable: false
+      width: 50
