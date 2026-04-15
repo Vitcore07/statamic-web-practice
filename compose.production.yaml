@@ -28,7 +28,6 @@ x-app-volumes: &app-volumes
     - './public/assets:/app/public/assets:z'
     - './storage:/app/storage:z'
     - './docker-data/statamic-img-cache:/app/public/img:z'
-
 x-app-service: &app-service
     image: '${APP_IMAGE:-cms-frankenphp}'
     build: *app-build
