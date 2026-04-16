@@ -1,3 +1,5 @@
+name: '${COMPOSE_PROJECT_NAME:-cms}'
+
 x-app-build: &app-build
     context: .
     dockerfile: docker/frankenphp/Dockerfile
@@ -21,13 +23,13 @@ x-app-environment: &app-environment
     RUN_STORAGE_LINK: '${RUN_STORAGE_LINK:-1}'
 
 x-app-volumes: &app-volumes
-    - './content:/app/content:z'
-    - './database:/app/database:z'
-    - './users:/app/users:z'
-    - './resources/users:/app/resources/users:z'
-    - './public/assets:/app/public/assets:z'
-    - './storage:/app/storage:z'
-    - './docker-data/statamic-img-cache:/app/public/img:z'
+    - '${APP_SHARED_PATH:?APP_SHARED_PATH must be set}/content:/app/content:z'
+    - '${APP_SHARED_PATH:?APP_SHARED_PATH must be set}/database/database.sqlite:/app/database/database.sqlite:z'
+    - '${APP_SHARED_PATH:?APP_SHARED_PATH must be set}/users:/app/users:z'
+    - '${APP_SHARED_PATH:?APP_SHARED_PATH must be set}/resources/users:/app/resources/users:z'
+    - '${APP_SHARED_PATH:?APP_SHARED_PATH must be set}/public/assets:/app/public/assets:z'
+    - '${APP_SHARED_PATH:?APP_SHARED_PATH must be set}/storage:/app/storage:z'
+    - '${APP_SHARED_PATH:?APP_SHARED_PATH must be set}/docker-data/statamic-img-cache:/app/public/img:z'
 x-app-service: &app-service
     image: '${APP_IMAGE:-cms-frankenphp}'
     build: *app-build
@@ -51,15 +53,15 @@ services:
             CONTAINER_ROLE: server
             RUN_MIGRATIONS: '${RUN_MIGRATIONS:-0}'
         ports:
-            - '${APP_PORT:-8080}:80'
+            - '127.0.0.1:${APP_PORT:-8080}:80'
         volumes:
-            - './content:/app/content:z'
-            - './database:/app/database:z'
-            - './users:/app/users:z'
-            - './resources/users:/app/resources/users:z'
-            - './public/assets:/app/public/assets:z'
-            - './storage:/app/storage:z'
-            - './docker-data/statamic-img-cache:/app/public/img:z'
+            - '${APP_SHARED_PATH:?APP_SHARED_PATH must be set}/content:/app/content:z'
+            - '${APP_SHARED_PATH:?APP_SHARED_PATH must be set}/database/database.sqlite:/app/database/database.sqlite:z'
+            - '${APP_SHARED_PATH:?APP_SHARED_PATH must be set}/users:/app/users:z'
+            - '${APP_SHARED_PATH:?APP_SHARED_PATH must be set}/resources/users:/app/resources/users:z'
+            - '${APP_SHARED_PATH:?APP_SHARED_PATH must be set}/public/assets:/app/public/assets:z'
+            - '${APP_SHARED_PATH:?APP_SHARED_PATH must be set}/storage:/app/storage:z'
+            - '${APP_SHARED_PATH:?APP_SHARED_PATH must be set}/docker-data/statamic-img-cache:/app/public/img:z'
         healthcheck:
             test: ['CMD-SHELL', 'curl -fsS http://127.0.0.1/up || exit 1']
             interval: 30s

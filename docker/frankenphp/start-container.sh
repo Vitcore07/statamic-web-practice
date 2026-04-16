@@ -41,6 +41,11 @@ require_writable_parent_directory() {
         exit 1
     fi
 
+    if [[ ! -w "${path}" ]]; then
+        echo "Required path is not writable: ${path}. Fix ownership and permissions during deployment." >&2
+        exit 1
+    fi
+
     local parent
     parent="$(dirname "${path}")"
 
