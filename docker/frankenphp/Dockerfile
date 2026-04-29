@@ -10,6 +10,7 @@ ARG WWWGROUP=1000
 ENV APP_HOME=/app \
     SERVER_NAME=:80 \
     SERVER_ROOT=/app/public \
+    COMPOSER_ALLOW_SUPERUSER=1 \
     XDG_CONFIG_HOME=/tmp
 
 WORKDIR /app
@@ -55,7 +56,9 @@ RUN composer dump-autoload \
     --classmap-authoritative \
     --no-dev \
     --no-interaction \
- && php artisan package:discover --ansi
+ && php artisan package:discover --ansi \
+ && php artisan vendor:publish --tag=statamic-cp --force --no-interaction --ansi \
+ && php artisan vendor:publish --tag=statamic-frontend --force --no-interaction --ansi
 
 FROM node:22-bookworm-slim AS frontend_build
 
@@ -88,6 +91,7 @@ RUN mv "${PHP_INI_DIR}/php.ini-production" "${PHP_INI_DIR}/php.ini"
 COPY . .
 COPY --from=php_build /app/vendor ./vendor
 COPY --from=php_build /app/bootstrap/cache ./bootstrap/cache
+COPY --from=php_build /app/public/vendor/statamic ./public/vendor/statamic
 COPY --from=frontend_build /app/public/build ./public/build
 COPY docker/frankenphp/php/conf.d/opcache.ini /usr/local/etc/php/conf.d/99-opcache.ini
 COPY docker/frankenphp/start-container.sh /usr/local/bin/start-container
