@@ -76,6 +76,11 @@ tabs:
                       fields:
                         -
                           import: highlight_cards
+                    features_section:
+                      display: 'Features section'
+                      fields:
+                        -
+                          import: features_section
   sidebar:
     display: Sidebar
     sections:

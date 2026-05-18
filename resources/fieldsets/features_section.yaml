@@ -1,0 +1,54 @@
+title: 'Features section'
+fields:
+  -
+    handle: heading
+    field:
+      type: text
+      display: Heading
+      instructions: 'Hlavný titulok sekcie'
+      localizable: false
+      instructions_position: below
+  -
+    handle: bagdes
+    field:
+      type: list
+      display: Bagdes
+      instructions: 'Zoznam malých odznakov zobrazených pod hlavným nadpisom'
+      localizable: false
+  -
+    handle: features_list
+    field:
+      type: replicator
+      display: 'Zoznam features'
+      localizable: false
+      sets:
+        features:
+          display: Features
+          sets:
+            feature:
+              display: Feature
+              fields:
+                -
+                  handle: heading
+                  field:
+                    type: text
+                    display: Heading
+                    localizable: false
+                -
+                  handle: icon
+                  field:
+                    type: icon
+                    display: Icon
+                    localizable: false
+                -
+                  handle: description
+                  field:
+                    type: text
+                    display: Description
+                    localizable: false
+  -
+    handle: footer_label
+    field:
+      type: text
+      display: 'Footer label'
+      localizable: false
