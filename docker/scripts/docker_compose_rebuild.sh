@@ -1,4 +1,5 @@
-!#/bin/bash
+#!/bin/bash
+set -e
 
 # Rebuild necessary containers
 docker compose -f compose.production.yaml build server queue scheduler

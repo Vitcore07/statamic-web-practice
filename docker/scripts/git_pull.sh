@@ -1,4 +1,5 @@
-!#/bin/bash
+#!/bin/bash
+set -e
 
 # if there are changes, ask the user if they want to pull the latest changes
 if [[ $(sudo -u git-deploy git status --porcelain) ]]; then
