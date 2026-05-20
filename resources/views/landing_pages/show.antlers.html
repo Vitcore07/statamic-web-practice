@@ -6,6 +6,12 @@
             {{ class = '' }}
             {{ content_class = 'pt-15' }}
         {{ endif }}
+        {{ if type == 'footer' }}
+            {{ wrapper_class = 'px-6' }}
+            {{ class = 'bg-slate-100' }}
+            {{ content_class = 'py-10' }}
+        {{ endif }}
+
         <div class="{{ wrapper_class }}">
             {{ partial src="partials/{type}" :class="class" :content_class="content_class" }}
         </div>
