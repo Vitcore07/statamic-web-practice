@@ -1,0 +1,51 @@
+title: Feature
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: desc
+            field:
+              type: textarea
+              display: Desc
+          -
+            handle: role
+            field:
+              type: text
+              display: Role
+          -
+            handle: icon
+            field:
+              container: assets
+              type: assets
+              display: Icon
+          -
+            handle: icon_desc
+            field:
+              type: text
+              display: Icon-desc
+          -
+            handle: url
+            field:
+              type: text
+              display: url
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'

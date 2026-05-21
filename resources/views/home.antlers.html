@@ -1,0 +1,117 @@
+<section class="py-16 bg-[#F8F9FA] font-sans w-full block text-gray-950">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center mb-12">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#EEF2F6] text-blue-600 text-xs font-semibold rounded-full mb-4">
+                <span class="w-1.5 h-1.5 bg-blue-600 rounded-full"></span> Referencie
+            </span>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight mb-4">
+                Skúsenosti, ktoré hovoria za nás
+            </h2>
+            <p class="text-gray-500 max-w-xl mx-auto text-sm md:text-base leading-relaxed">
+                Pozrite sa, ako webBox pomáha firmám fungovať
+                <br>bez zbytočného papierovania a straty času.
+            </p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12 mb-14 opacity-50 grayscale hover:grayscale-0 transition duration-300">
+            {{ collection:icons }}
+                {{ if icon }}
+                    {{ icon }}
+                        <img src="{{ url }}" alt="{{ title }}" class="h-6 w-auto max-w-[130px] max-h-6 object-contain inline-block">
+                    {{ /icon }}
+                {{ /if }}
+            {{ /collection:icons }}
+        </div>
+
+        {{ collection:main_features }}
+        <div class="bg-[#F7F7F7] p-8 md:p-12 rounded-3xl relative overflow-hidden mb-2 border border-gray-100 flex flex-col justify-between min-h-[350px]">
+        
+            <div class="absolute right-0 top-1/2 -translate-y-1/2 w-80 h-80 hidden md:block pointer-events-none select-none overflow-hidden origin-center -rotate-90 opacity-[0.04] grayscale scale-[2.5]">
+                {{ if logo }}
+                    {{ logo }}
+                        <img src="{{ url }}" alt="" class="w-full h-full object-contain">
+                    {{ /logo }}
+                {{ /if }}
+            </div>
+        
+            <div class="relative z-10 max-w-3xl flex flex-col gap-4">
+            
+                <div>
+                    <span class="block font-bold text-gray-900 text-base leading-none mb-1.5">{{ title }}</span>
+                    <span class="text-xs text-gray-400 font-semibold tracking-wider uppercase">{{ role }}</span>
+                </div>
+            
+                <blockquote class="text-xl md:text-3xl font-bold text-gray-900 leading-snug tracking-tight">
+                    "{{ desc }}"
+                </blockquote>
+            
+            </div>
+        
+            <div class="relative z-10 flex justify-end w-full mt-6 md:mt-0 h">
+                <div class="flex items-center justify-end shrink-0">
+                    {{ if logo }}
+                        {{ logo }}
+                            <img src="{{ url }}" alt="Witzenmann Logo" class="h-22 w-auto max-w-[140px] object-contain opacity-70 grayscale">
+                        {{ /logo }}
+                    {{ /if }}
+                </div>
+            </div>
+        </div>
+                <div class="bg-[#F7F7F7] px-8 py-5 rounded-2xl flex flex-wrap items-center justify-between gap-6 mb-4 border border-gray-200/50 text-gray-900">
+                    <div class="flex flex-wrap gap-8 md:gap-16">
+                        <div>
+                            <span class="block text-2xl font-bold text-gray-900 tracking-tight">{{ usetrenych_hodin }}</span>
+                            <span class="text-xs text-gray-400 font-medium">Ušetrených hodín mesačne</span>
+                        </div>
+                        <div class="border-l border-gray-200 h-8 my-auto hidden sm:block"></div>
+                        <div>
+                            <span class="block text-2xl font-bold text-gray-900 tracking-tight">{{ pouzivatelov_systemu }}</span>
+                            <span class="text-xs text-gray-400 font-medium">Používateľov systému</span>
+                        </div>
+                        <div class="border-l border-gray-200 h-8 my-auto hidden sm:block"></div>
+                        <div>
+                            <span class="block text-2xl font-bold text-gray-900 tracking-tight">{{ webbox_moduly }}</span>
+                            <span class="text-xs text-gray-400 font-medium">webBox moduly</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-2">
+                        <button class="w-9 h-9 rounded-full bg-white flex items-center justify-center border border-gray-200/80 shadow-sm text-gray-400 hover:text-gray-600 transition">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                        </button>
+                        <button class="w-9 h-9 rounded-full bg-white flex items-center justify-center border border-gray-200/80 shadow-sm text-gray-400 hover:text-gray-600 transition">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
+        {{ /collection:main_features }}
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 w-full">
+            {{ collection:features }}
+                <div class="p-8 md:p-10 rounded-3xl flex flex-col justify-between min-h-[260px] shadow-sm border border-gray-100 transition duration-300 hover:shadow-md">
+                    
+                    <blockquote class="text-xl font-bold text-gray-900 leading-snug tracking-tight mb-8">
+                        {{ desc }}
+                    </blockquote>
+                    
+                    <div class="flex items-center justify-between mt-auto pt-5 border-t border-gray-100">
+                        <div class="flex flex-col justify-center">
+                            <span class="block font-bold text-gray-950 text-sm mb-0.5 leading-tight">{{ title }}</span>
+                            <span class="text-xs text-gray-400 font-semibold tracking-wide">{{ role }}</span>
+                        </div>
+                        <div class="flex items-center justify-end h-6 max-w-[120px] shrink-0">
+                            {{ if icon }}
+                                {{ icon }}
+                                    <img src="{{ url }}" alt="{{ title }}" class="h-18 w-auto max-w-[120px] max-h-25 object-contain grayscale opacity-70">
+                                {{ /icon }}
+                            {{ /if }}
+                        </div>
+                    </div>
+                    
+                </div>
+            {{ /collection:features }}
+        </div>
+
+    </div>
+</section>

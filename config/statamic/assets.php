@@ -52,7 +52,7 @@ return [
         |
         */
 
-        'cache' => true,
+        'cache' => false,
         'cache_path' => public_path('img'),
 
         /*
@@ -206,6 +206,19 @@ return [
     */
 
     'additional_uploadable_extensions' => [],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Additional Filename Character Replacements
+    |--------------------------------------------------------------------------
+    |
+    | When uploading files, certain characters in filenames will be replaced
+    | to ensure a safe filename. You may configure additional replacements.
+    | These are in addition to the native ones. They are not overridable.
+    |
+    */
+
+    'additional_filename_replacements' => [],
 
     /*
     |--------------------------------------------------------------------------

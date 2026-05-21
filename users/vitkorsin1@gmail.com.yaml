@@ -1,0 +1,16 @@
+name: vitino
+super: true
+id: 7ea1e58e-b962-462c-911d-ebc52d294f84
+password_hash: $2y$12$sLXNpcG1A6IHvp0VepY5BexRrJXw4TYJmjeodiKtz40tO/e.yqp0G
+preferences:
+  collections:
+    main_features:
+      view: list
+    icons:
+      view: list
+    features:
+      view: list
+    pages:
+      view: tree
+    stats:
+      view: list

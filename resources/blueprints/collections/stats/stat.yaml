@@ -1,0 +1,41 @@
+title: Stat
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+              display: Title
+          -
+            handle: pouzivatelov_systemu
+            field:
+              type: text
+              display: Používateľov-systému
+          -
+            handle: webbox_moduly
+            field:
+              type: text
+              display: Webbox-moduly
+          -
+            handle: usetrenych_hodin
+            field:
+              type: text
+              display: Ušetrených-hodín
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'

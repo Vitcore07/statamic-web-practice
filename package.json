@@ -5,19 +5,14 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "format:antlers": "prettier --write \"resources/**/*.antlers.html\""
+        "watch": "vite"
     },
     "devDependencies": {
-        "@tailwindcss/vite": "^4.0.0",
-        "axios": "^1.11.0",
+        "@tailwindcss/typography": "^0.5.16",
+        "@tailwindcss/vite": "^4.0.6",
         "concurrently": "^9.0.1",
-        "laravel-vite-plugin": "^3.0.0",
-        "prettier": "^3.8.1",
-        "prettier-plugin-antlers": "^2.0.5",
-        "tailwindcss": "^4.0.0",
+        "laravel-vite-plugin": "^3.1",
+        "tailwindcss": "^4.0.6",
         "vite": "^8.0.0"
-    },
-    "dependencies": {
-        "alpinejs": "^3.15.8"
     }
 }

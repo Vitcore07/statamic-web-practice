@@ -41,7 +41,7 @@ return [
 
         'database' => [
             'driver' => 'database',
-            'connection' => env('DB_CACHE_CONNECTION'),
+            'connection' => env('DB_CACHE_CONNECTION', null),
             'table' => env('DB_CACHE_TABLE', 'cache'),
             'lock_connection' => env('DB_CACHE_LOCK_CONNECTION'),
             'lock_table' => env('DB_CACHE_LOCK_TABLE'),
@@ -99,6 +99,11 @@ return [
             ],
         ],
 
+        'static_cache' => [
+            'driver' => 'file',
+            'path' => storage_path('statamic/static-urls-cache'),
+        ],
+
     ],
 
     /*
@@ -125,6 +130,6 @@ return [
     |
     */
 
-    'serializable_classes' => true,
+    'serializable_classes' => false,
 
 ];

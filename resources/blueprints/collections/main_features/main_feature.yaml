@@ -1,0 +1,61 @@
+title: Main-feature
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: role
+            field:
+              type: text
+              display: Role
+          -
+            handle: desc
+            field:
+              type: textarea
+              display: Desc
+          -
+            handle: logo
+            field:
+              container: assets
+              type: assets
+              display: Logo
+          -
+            handle: usetrenych_hodin
+            field:
+              type: text
+              display: Ušetrených-hodín
+          -
+            handle: pouzivatelov_systemu
+            field:
+              type: text
+              display: Používateľov-systému
+          -
+            handle: webbox_moduly
+            field:
+              type: text
+              display: Webbox-moduly
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+  new_tab:
+    display: 'New Tab'
+    sections:
+      -
+        display: 'New Section'

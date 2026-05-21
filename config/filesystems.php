@@ -47,15 +47,6 @@ return [
             'report' => false,
         ],
 
-        'assets' => [
-            'driver' => 'local',
-            'root' => public_path('assets'),
-            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/assets',
-            'visibility' => 'public',
-            'throw' => false,
-            'report' => false,
-        ],
-
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -65,6 +56,16 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'throw' => false,
+            'report' => false,
+            // 'visibility' => 'public', // https://statamic.dev/assets#container-visibility
+        ],
+
+        'assets' => [
+            'driver' => 'local',
+            'root' => public_path('assets'),
+            'url' => '/assets',
+            'visibility' => 'public',
             'throw' => false,
             'report' => false,
         ],

@@ -1,8 +1,0 @@
-buttons:
-  -
-    handle: login
-    label: 'Prihlásiť sa'
-    url: 'https://dochadzka.top/'
-    icon: icons/arrow-enter
-    icon_position: left
-    new_tab: true
