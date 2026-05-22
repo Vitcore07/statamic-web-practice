@@ -43,16 +43,16 @@
                 </div>
             
                 <blockquote class="text-xl md:text-3xl font-bold text-gray-900 leading-snug tracking-tight">
-                    "{{ desc }}"
+                    {{ desc }}.
                 </blockquote>
             
             </div>
         
-            <div class="relative z-10 flex justify-end w-full mt-6 md:mt-0 h">
+            <div class="relative z-10 flex justify-end w-full mt-6 md:mt-12">
                 <div class="flex items-center justify-end shrink-0">
                     {{ if logo }}
                         {{ logo }}
-                            <img src="{{ url }}" alt="Witzenmann Logo" class="h-22 w-auto max-w-[140px] object-contain opacity-70 grayscale">
+                            <img src="{{ url }}" alt="" class="h-24 w-auto max-w-[140px] object-contain opacity-70 grayscale">
                         {{ /logo }}
                     {{ /if }}
                 </div>
@@ -92,7 +92,7 @@
                 <div class="p-8 md:p-10 rounded-3xl flex flex-col justify-between min-h-[260px] shadow-sm border border-gray-100 transition duration-300 hover:shadow-md">
                     
                     <blockquote class="text-xl font-bold text-gray-900 leading-snug tracking-tight mb-8">
-                        {{ desc }}
+                        {{ desc }}.
                     </blockquote>
                     
                     <div class="flex items-center justify-between mt-auto pt-5 border-t border-gray-100">

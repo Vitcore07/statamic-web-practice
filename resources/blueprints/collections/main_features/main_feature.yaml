@@ -43,6 +43,11 @@ tabs:
             field:
               type: text
               display: Webbox-moduly
+          -
+            handle: img_desc
+            field:
+              type: text
+              display: img-desc
   sidebar:
     display: Sidebar
     sections:
