@@ -7,8 +7,9 @@ desc: 'Systém je intuitívny a spoľahlivý. To, čo nám predtým zabralo 133 
 usetrenych_hodin: '117'
 pouzivatelov_systemu: 1400+
 updated_by: 7ea1e58e-b962-462c-911d-ebc52d294f84
-updated_at: 1779385943
+updated_at: 1779435432
 vydanych_jedal_mesacne: 9400+
 logo:
   - images.jpeg
+img_desc: 'fakultná nemocnica Nitra logo'
 ---

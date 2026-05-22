@@ -33,16 +33,19 @@ tabs:
             field:
               type: text
               display: Ušetrených-hodín
+              input_type: number
           -
             handle: pouzivatelov_systemu
             field:
               type: text
               display: Používateľov-systému
+              input_type: number
           -
             handle: webbox_moduly
             field:
               type: text
               display: Webbox-moduly
+              input_type: number
           -
             handle: img_desc
             field:

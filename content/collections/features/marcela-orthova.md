@@ -7,7 +7,7 @@ role: 'Zástupkyňa veliteľa'
 icon:
   - i_8480291.jpg
 updated_by: 7ea1e58e-b962-462c-911d-ebc52d294f84
-updated_at: 1779277451
+updated_at: 1779439802
 icon_desc: 'Mestská polícia Veľký Krtíš'
 url: 'https://www.velky-krtis.sk/portals_pictures/i_008480/i_8480291.jpg'
 ---

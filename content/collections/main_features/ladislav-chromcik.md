@@ -7,7 +7,7 @@ desc: 'V našej spoločnosti systém spracováva zložité striedanie zmien, sle
 logo:
   - witzenmann.svg
 updated_by: 7ea1e58e-b962-462c-911d-ebc52d294f84
-updated_at: 1779386305
+updated_at: 1779435829
 usetrenych_hodin: 1200+
 pouzivatelov_systemu: 400+
 webbox_moduly: '4'

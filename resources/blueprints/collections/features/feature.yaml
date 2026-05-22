@@ -33,11 +33,6 @@ tabs:
             field:
               type: text
               display: Icon-desc
-          -
-            handle: url
-            field:
-              type: text
-              display: url
   sidebar:
     display: Sidebar
     sections:
