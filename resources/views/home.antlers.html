@@ -1,4 +1,4 @@
-<section class="py-16 bg-[#F8F9FA] font-sans w-full block text-gray-950">
+<section class="py-16 bg-[#FFFFFF] font-sans w-full block text-gray-950">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center mb-12">
@@ -14,7 +14,7 @@
             </p>
         </div>
 
-        <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12 mb-14 opacity-50 grayscale hover:grayscale-0 transition duration-300">
+        <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12 mb-14 opacity-50 grayscale">
             {{ collection:icons }}
                 {{ if icon }}
                     {{ icon }}
@@ -76,7 +76,6 @@
                         <span class="text-xs text-gray-400 font-medium">webBox moduly</span>
                     </div>
                 </div>
-                
                 <div class="flex gap-2">
                     <button id="prev-Btn" class="w-9 h-9 rounded-full bg-white flex items-center justify-center border border-gray-200/80 shadow-sm text-gray-400 hover:text-gray-600 transition active:scale-95">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
@@ -86,13 +85,12 @@
                     </button>
                 </div>
             </div>
-
         </div>
         {{ /collection:main_features }}
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-2 w-full mt-10">
             {{ collection:features }}
-                <div class="p-8 md:p-10 rounded-3xl flex flex-col justify-between min-h-[260px] shadow-sm border border-gray-100 transition duration-300 hover:shadow-md">
+                <div class="bg-[#F7F7F7] p-8 md:p-10 rounded-3xl flex flex-col justify-between min-h-[260px] shadow-sm border border-gray-100 transition duration-300">
                     <blockquote class="text-xl font-bold text-gray-900 leading-snug tracking-tight mb-8">
                         "{{ desc }}."
                     </blockquote>
