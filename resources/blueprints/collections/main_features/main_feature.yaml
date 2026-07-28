@@ -29,17 +29,20 @@ tabs:
               type: assets
               display: Logo
           -
+            handle: img_desc
+            field:
+              type: text
+              display: img-desc
+          -
             handle: usetrenych_hodin
             field:
               type: text
               display: Ušetrených-hodín
-              input_type: number
           -
             handle: pouzivatelov_systemu
             field:
               type: text
               display: Používateľov-systému
-              input_type: number
           -
             handle: webbox_moduly
             field:
@@ -47,10 +50,10 @@ tabs:
               display: Webbox-moduly
               input_type: number
           -
-            handle: img_desc
+            handle: vyplatenych_jedal
             field:
               type: text
-              display: img-desc
+              display: Vyplatených-jedál
   sidebar:
     display: Sidebar
     sections:

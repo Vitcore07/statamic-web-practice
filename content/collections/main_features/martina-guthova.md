@@ -5,11 +5,12 @@ title: 'Martina Guthová'
 role: 'Vedúca stravovacieho oddelenia'
 desc: 'Systém je intuitívny a spoľahlivý. To, čo nám predtým zabralo 133 hodín, teraz zvládneme za 16'
 usetrenych_hodin: 117
-pouzivatelov_systemu: 1400
 updated_by: 7ea1e58e-b962-462c-911d-ebc52d294f84
-updated_at: 1779642725
+updated_at: 1779777770
 vydanych_jedal_mesacne: 9400+
 img_desc: 'fakultná nemocnica Nitra logo'
 logo:
   - images.jpeg
+vyplatenych_jedal: 9400+
+pouzivatelov_systemu: 1400+
 ---

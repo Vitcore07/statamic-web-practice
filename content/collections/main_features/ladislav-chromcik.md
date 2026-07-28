@@ -5,11 +5,11 @@ title: 'Ladislav Chromčík'
 role: CFO
 desc: 'V našej spoločnosti systém spracováva zložité striedanie zmien, sleduje priradenia k výrobným linkám a spravuje bezpečnostné predpisy'
 updated_by: 7ea1e58e-b962-462c-911d-ebc52d294f84
-updated_at: 1779642772
-usetrenych_hodin: 1200
-pouzivatelov_systemu: 400
+updated_at: 1779777754
 webbox_moduly: 4
 img_desc: 'witzenmann logo'
 logo:
   - witzenmann.png
+usetrenych_hodin: 1200+
+pouzivatelov_systemu: 400+
 ---
