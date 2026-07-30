@@ -14,20 +14,10 @@ tabs:
                 - required
               display: Title
           -
-            handle: pouzivatelov_systemu
+            handle: amount
             field:
               type: text
-              display: Používateľov-systému
-          -
-            handle: webbox_moduly
-            field:
-              type: text
-              display: Webbox-moduly
-          -
-            handle: usetrenych_hodin
-            field:
-              type: text
-              display: Ušetrených-hodín
+              display: Amount
   sidebar:
     display: Sidebar
     sections:

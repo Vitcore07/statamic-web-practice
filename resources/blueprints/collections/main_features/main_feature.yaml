@@ -34,26 +34,21 @@ tabs:
               type: text
               display: img-desc
           -
-            handle: usetrenych_hodin
+            handle: stats
             field:
-              type: text
-              display: Ušetrených-hodín
-          -
-            handle: pouzivatelov_systemu
-            field:
-              type: text
-              display: Používateľov-systému
-          -
-            handle: webbox_moduly
-            field:
-              type: text
-              display: Webbox-moduly
-              input_type: number
-          -
-            handle: vyplatenych_jedal
-            field:
-              type: text
-              display: Vyplatených-jedál
+              type: grid
+              display: Stats
+              fields:
+                -
+                  handle: label
+                  field:
+                    type: text
+                    display: Label
+                -
+                  handle: amount
+                  field:
+                    type: text
+                    display: Amount
   sidebar:
     display: Sidebar
     sections:
