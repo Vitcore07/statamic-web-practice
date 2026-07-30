@@ -6,28 +6,31 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIndex = 0;
 
     function slide(index) {
-    if (index < 0) {
-        index = items.length - 1;
-    } else if (index >= items.length) {
-        index = 0;
-    }
+        if (index < 0) {
+            index = items.length - 1;
+        } else if (index >= items.length) {
+            index = 0;
+        }
 
-    currentIndex = index;
+        currentIndex = index;
 
-    items.forEach((item, i) => {
+        items.forEach((item, i) => {
             if (i === currentIndex) {
-                item.classList.remove('hidden', 'opacity-0');
-                item.classList.add('block', 'opacity-100');
+                item.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    item.classList.remove('opacity-0');
+                    item.classList.add('opacity-100');
+                }, 20);
             } else {
-                item.classList.remove('block', 'opacity-100');
-                item.classList.add('hidden', 'opacity-0');
+                item.classList.remove('opacity-100');
+                item.classList.add('opacity-0', 'hidden');
             }
         });
-}
+    }
 
     prevBtn.addEventListener('click', () => slide(currentIndex - 1));
     nextBtn.addEventListener('click', () => slide(currentIndex + 1));
     
     slide(0);
-    
 });
